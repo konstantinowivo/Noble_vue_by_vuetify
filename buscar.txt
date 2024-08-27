@@ -1,0 +1,6 @@
+* Que es y para que sirve mongoose?
+
+* Que es y para que sirve un archivo .env?
+
+* Que es y para que sirve pinia?
+

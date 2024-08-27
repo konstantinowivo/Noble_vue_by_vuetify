@@ -14,8 +14,12 @@ export default defineNuxtConfig({
 
   modules: ['@pinia/nuxt'],
 
+  runtimeConfig:{
+    MONGO_URI: process.env.MONGO_URI
+  },
+
   build:{
     transpile: ['vuetify']
-  },
+  }
   
 })

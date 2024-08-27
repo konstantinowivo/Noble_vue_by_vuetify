@@ -1,5 +1,5 @@
 <template>
-  <div>
-    <Navbar/>
-  </div>
+    <VApp>
+      <Navbar/>
+    </VApp>
 </template>

@@ -1,6 +1,10 @@
 <template>
     <div>
-        <h1>crud</h1>
+        <VAppBar>
+            <template v-slot:title>
+                CRUD NUXT 3
+            </template>
+        </VAppBar>
     </div>
 </template>
 

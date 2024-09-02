@@ -4,3 +4,4 @@
 
 * Que es y para que sirve pinia?
 
+* Que es y para que sirve un patch en request a API?

@@ -30,6 +30,7 @@
 
 <script>
 export default {
+  name: 'ContactForm',
   data() {
     return {
       valid: false,
@@ -42,7 +43,7 @@ export default {
       ],
       emailRules: [
         v => !!v || 'El email es requerido',
-        v => (v && v.length <= 50) || 'Introduce un email válido',
+        v => /.+@.+\..+/.test(v) || 'Introduce un email válido',
       ],
       messageRules: [
         v => !!v || 'El mensaje es requerido',
@@ -53,10 +54,8 @@ export default {
   methods: {
     submit() {
       if (this.$refs.form.validate()) {
-        // Lógica para enviar el formulario
         alert('Formulario enviado correctamente');
-        // Aquí puedes hacer una llamada HTTP para enviar los datos, por ejemplo:
-        // this.$axios.post('/api/contact', { name: this.name, email: this.email, message: this.message });
+        // Lógica de envío del formulario (por ejemplo, axios POST)
       }
     },
   },

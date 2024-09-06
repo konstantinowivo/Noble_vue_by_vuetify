@@ -1,7 +1,29 @@
-* Que es y para que sirve mongoose?
-
-* Que es y para que sirve un archivo .env?
-
-* Que es y para que sirve pinia?
-
-* Que es y para que sirve un patch en request a API?
+/nuxt-landing-page/
+│
+├── /assets/            # Archivos estáticos (imágenes, fuentes, etc.)
+│   └── logo.png        # Ejemplo de imagen para el logo
+│
+├── /components/        # Componentes Vue.js reutilizables
+│   ├── Header.vue      # Header común entre las páginas
+│   ├── Footer.vue      # Footer común entre las páginas
+│   ├── ServiceCard.vue # Componente para cada tarjeta de servicio
+│   ├── BrandCarousel.vue # Carrusel de marcas en la página principal
+│   └── ContactForm.vue # Formulario de contacto
+│
+├── /layouts/           # Plantillas para la estructura común de las páginas
+│   └── default.vue     # Layout por defecto (header, footer y <nuxt />)
+│
+├── /pages/             # Vistas o páginas del sitio
+│   ├── index.vue       # Página de inicio (home)
+│   └── contacto.vue    # Página de contacto
+│
+├── /plugins/           # Plugins de Vuetify y otros módulos
+│   └── vuetify.js      # Configuración de Vuetify
+│
+├── /static/            # Archivos estáticos servidos tal cual
+│   └── favicon.ico     # Favicon del sitio
+│
+├── /store/             # Store para el manejo de estado (Pinia o Vuex)
+│
+├── nuxt.config.js      # Configuración del proyecto Nuxt
+└── package.json        # Dependencias y scripts del proyecto

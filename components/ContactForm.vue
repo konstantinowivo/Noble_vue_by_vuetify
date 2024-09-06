@@ -42,7 +42,7 @@ export default {
       ],
       emailRules: [
         v => !!v || 'El email es requerido',
-        v => /.+@.+\..+/.test(v) || 'Introduce un email válido',
+        v => (v && v.length <= 50) || 'Introduce un email válido',
       ],
       messageRules: [
         v => !!v || 'El mensaje es requerido',

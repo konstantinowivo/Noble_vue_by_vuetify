@@ -2,9 +2,9 @@
   <v-container fluid class="hero-section" fill-height>
     <v-row align="center" justify="center">
       <v-col cols="12" md="8" class="text-center">
-        <h1 class="display-1 font-weight-bold text-white">{{ title }}</h1>
-        <p class="subtitle-1 text-white">{{ subtitle }}</p>
-        <v-btn large color="primary" @click="ctaAction">{{ ctaText }}</v-btn>
+          <h1 class="hero-title text-h1">{{ title }}</h1>
+          <p class="subtitle-1 text-h4">{{ subtitle }}</p>
+          <v-btn large color="primary" @click="ctaAction">{{ ctaText }}</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -16,7 +16,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'Bienvenido a Nuestra Empresa'
+      default: 'Matafuegos Noble'
     },
     subtitle: {
       type: String,
@@ -37,15 +37,23 @@ export default {
 
 <style scoped>
 .hero-section {
-  background-image: url('/path/to/hero-background.jpg');
+  background-image: url('../assets/portada.index.jpg');
   background-size: cover;
   background-position: center;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
-.text-white {
-  color: white;
+
+.hero-content {
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente para mayor legibilidad */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.hero-title {
+    color: yellow;
 }
 </style>

@@ -17,7 +17,6 @@ export default {
     title: String,
     subtitle: String,
     description: String,
-    image: String
   }
 };
 </script>

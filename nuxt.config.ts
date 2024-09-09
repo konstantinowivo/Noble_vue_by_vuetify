@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
 
+
   imports:{
     dirs:['store']
   },
@@ -20,6 +21,17 @@ export default defineNuxtConfig({
 
   build:{
     transpile: ['vuetify']
+  },
+
+  app: {
+    head: {
+      link: [
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap'
+        }
+      ]
+    }
   }
   
 })

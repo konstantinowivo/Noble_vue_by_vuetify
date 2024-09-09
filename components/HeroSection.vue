@@ -1,3 +1,5 @@
+
+
 <template>
   <v-container fluid class="hero-section" fill-height>
     <v-row align="center" justify="center">
@@ -54,6 +56,9 @@ export default {
 }
 
 .hero-title {
+    font-family: "Bebas Neue", cursive;
+    font-weight: bolder;
+    font-style: italic;
     color: yellow;
 }
 </style>

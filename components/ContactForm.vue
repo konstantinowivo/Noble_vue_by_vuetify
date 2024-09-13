@@ -25,6 +25,16 @@
     <v-btn :disabled="!valid" @click="submit">
       Enviar
     </v-btn>
+
+    <v-dialog v-model="showModal" max-width="400">
+      <v-card>
+        <v-card-title class="headline">Correo enviado</v-card-title>
+        <v-card-text>Tu correo ha sido enviado correctamente.</v-card-text>
+        <v-card-actions>
+          <v-btn color="primary" text @click="showModal = false">Cerrar</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-form>
 </template>
 
@@ -39,6 +49,7 @@ export default {
       from_name: '',
       email_id: '',
       message: '',
+      showModal: false, 
       nameRules: [
         v => !!v || 'El nombre es requerido',
         v => (v && v.length <= 50) || 'El nombre debe tener menos de 50 caracteres',
@@ -66,7 +77,8 @@ export default {
           .send('service_6slf0ka', 'template_lo3v4hb', templateParams, '8Kp9zy0H--xYV5imf')
           .then(
             response => {
-              alert('Correo enviado correctamente');
+              this.clearForm(); // Limpiar el formulario después del envío
+              this.showModal = true; // Mostrar el modal
               console.log('SUCCESS!', response.status, response.text);
             },
             err => {
@@ -76,9 +88,14 @@ export default {
           );
       }
     },
+    clearForm() {
+      this.from_name = '';
+      this.email_id = '';
+      this.message = '';
+      this.$refs.form.resetValidation(); 
+    },
   },
 };
-
 </script>
 
 <style scoped>

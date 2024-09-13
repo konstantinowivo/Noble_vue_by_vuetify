@@ -2,7 +2,7 @@
   <v-container class="about-us-section my-10">
     <v-row align="center">
       <v-col cols="12" md="6">
-        <v-img src="/path/to/about-us-image.jpg" class="rounded-lg" max-height="400px"></v-img>
+        <img src="./public/about_img.jpg" />
       </v-col>
       <v-col cols="12" md="6">
         <h2 class="font-weight-bold mb-4">{{ title }}</h2>

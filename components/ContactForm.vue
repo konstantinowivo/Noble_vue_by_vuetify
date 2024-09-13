@@ -1,14 +1,14 @@
 <template>
   <v-form v-model="valid" ref="form" lazy-validation>
     <v-text-field
-      v-model="name"
+      v-model="from_name"
       :rules="nameRules"
       label="Nombre"
       required
     ></v-text-field>
 
     <v-text-field
-      v-model="email"
+      v-model="email_id"
       :rules="emailRules"
       label="Email"
       required
@@ -29,13 +29,15 @@
 </template>
 
 <script>
+import emailjs from 'emailjs-com';
+
 export default {
   name: 'ContactForm',
   data() {
     return {
       valid: false,
-      name: '',
-      email: '',
+      from_name: '',
+      email_id: '',
       message: '',
       nameRules: [
         v => !!v || 'El nombre es requerido',
@@ -54,12 +56,29 @@ export default {
   methods: {
     submit() {
       if (this.$refs.form.validate()) {
-        alert('Formulario enviado correctamente');
-        // Lógica de envío del formulario (por ejemplo, axios POST)
+        const templateParams = {
+          from_name: this.from_name,
+          email_id: this.email_id,
+          message: this.message,
+        };
+
+        emailjs
+          .send('service_6slf0ka', 'template_lo3v4hb', templateParams, '8Kp9zy0H--xYV5imf')
+          .then(
+            response => {
+              alert('Correo enviado correctamente');
+              console.log('SUCCESS!', response.status, response.text);
+            },
+            err => {
+              alert('Error al enviar el correo');
+              console.log('FAILED...', err);
+            }
+          );
       }
     },
   },
 };
+
 </script>
 
 <style scoped>

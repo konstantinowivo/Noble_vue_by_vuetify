@@ -1,8 +1,7 @@
 <template>
   <v-container class="about-us-section my-10">
     <v-row align="center">
-      <v-col cols="12" md="6">
-        <img src="./public/about_img.jpg" />
+      <v-col :style="aboutUsImg" fluid fill-height cols="12" md="6">
       </v-col>
       <v-col cols="12" md="6">
         <h2 class="font-weight-bold mb-4">{{ title }}</h2>
@@ -14,6 +13,8 @@
 </template>
 
 <script>
+import co2Carousel from '@/assets/co2_carousel.jpg'; // Importa la imagen
+
 export default {
   name: 'AboutUs',
   props: {
@@ -30,6 +31,21 @@ export default {
       default: 'Aprende más'
     }
   },
+  computed: {
+    aboutUsImg() {
+      return {
+        background: `radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.9) 100%), url(${co2Carousel})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        height: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        border: '5px solid rgba(0, 0, 0, 0.9)'
+      };
+    },
+  },
   methods: {
     learnMore() {
       this.$router.push('/contacto');
@@ -41,8 +57,5 @@ export default {
 <style scoped>
 .about-us-section {
   padding: 2rem 0;
-}
-.rounded-lg {
-  border-radius: 8px;
 }
 </style>

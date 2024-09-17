@@ -12,9 +12,15 @@
             <v-card-title :style="cardTitleStyle">{{ service.title }}</v-card-title>
             <v-card-text :style="descriptionStyle">{{ service.description }}</v-card-text>
             <v-card-actions>
-            <v-btn outlined :style="buttonStyle" @mouseover="hoverButton" @mouseleave="resetButton" @click="ctaAction">
-              {{ ctaText }}
-            </v-btn>
+              <v-btn 
+                outlined 
+                :style="buttonStyle" 
+                @mouseover="hoverButton" 
+                @mouseleave="resetButton" 
+                @click="ctaAction"
+              >
+                {{ ctaText }}
+              </v-btn>
             </v-card-actions>
           </div>
         </v-card>
@@ -42,7 +48,12 @@ export default {
         { id: 1, title: 'EXTINTORES', description: 'Venta y recarga de extintores para la industria, comercio y hogar', image: matafuegosImage },
         { id: 2, title: 'SODASTREAM', description: 'Venta y recarga de envases de sodastream y capsulas para sifones', image: sodaStreamImage },
         { id: 3, title: 'GASES NO INFLAMABLES', description: 'Venta y recarga de gases para consumo o medicinal', image: tubosImage },
-      ]
+      ],
+      buttonStyle: {
+        backgroundColor: 'black',
+        color: 'white',
+        borderColor: 'black'
+      }
     };
   },
   computed: {
@@ -53,8 +64,8 @@ export default {
         fontStyle: 'italic',
         color: 'yellow'
       };
-  },
-  descriptionStyle() {
+    },
+    descriptionStyle() {
       return {
         fontFamily: '"Bebas Neue", cursive',
         fontWeight: 'bolder',
@@ -69,7 +80,6 @@ export default {
     },
     hoverButton() {
       this.buttonStyle = {
-        ...this.buttonStyle,
         backgroundColor: '#ff5722',
         color: '#ffffff',
         borderColor: '#ff5722'
@@ -84,7 +94,6 @@ export default {
     }
   }
 }
-
 </script>
 
 <style scoped>
@@ -123,7 +132,6 @@ export default {
 }
 
 .card-title,
-.card-subtitle,
 .card-text {
   color: white; /* Color del texto para contraste con el fondo oscuro */
   text-align: center; /* Alinea el texto en el centro */

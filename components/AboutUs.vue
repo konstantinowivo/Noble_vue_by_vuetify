@@ -7,7 +7,6 @@
       <v-col cols="12" md="6" class="d-flex flex-column justify-center">
         <h1 :style="titleStyle" class="text-center">{{ title }}</h1>
         <p :style="subtitleStyle" class="text-center">{{ description }}</p>
-        <v-btn color="primary" @click="learnMore">{{ learnMoreText }}</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -27,10 +26,6 @@ export default {
       type: String,
       default: 'Somos una empresa dedicada a brindar soluciones personalizadas para cada cliente, con años de experiencia en el mercado.'
     },
-    learnMoreText: {
-      type: String,
-      default: 'Aprende más'
-    }
   },
   computed: {
     titleStyle() {

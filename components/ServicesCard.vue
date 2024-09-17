@@ -1,24 +1,22 @@
 <template>
   <v-container>
-    <v-row> 
+    <v-row>
       <v-col v-for="service in services" :key="service.id" cols="12" md="4">
         <v-card
-          class="mx-auto card-height" 
+          class="mx-auto card-height hover-card"
           color="surface-variant"
           :image="service.image"
-          :subtitle="service.subtitle"
-          :title="service.title"
           max-width="340"
         >
-          <template v-slot:actions>
-            <v-btn
-              append-icon="mdi-chevron-right"
-              color="red-lighten-2"
-              text="Book Activity"
-              variant="outlined"
-              block
-            ></v-btn>
-          </template>
+          <div class="card-content">
+            <v-card-title :style="cardTitleStyle">{{ service.title }}</v-card-title>
+            <v-card-text :style="descriptionStyle">{{ service.description }}</v-card-text>
+            <v-card-actions>
+            <v-btn outlined :style="buttonStyle" @mouseover="hoverButton" @mouseleave="resetButton" @click="ctaAction">
+              {{ ctaText }}
+            </v-btn>
+            </v-card-actions>
+          </div>
         </v-card>
       </v-col>
     </v-row>
@@ -32,24 +30,102 @@ import tubosImage from '@/assets/co2_tubos.jpg'
 
 export default {
   name: 'ServiceList',
+  props: {
+    ctaText: {
+      type: String,
+      default: 'Contactanos'
+    }
+  },
   data() {
     return {
       services: [
-        { id: 1, title: 'Servicio 1', subtitle: 'Subtítulo 1', image: matafuegosImage },
-        { id: 2, title: 'Servicio 2', subtitle: 'Subtítulo 2', image: sodaStreamImage },
-        { id: 3, title: 'Servicio 3', subtitle: 'Subtítulo 3', image: tubosImage },
+        { id: 1, title: 'EXTINTORES', description: 'Venta y recarga de extintores para la industria, comercio y hogar', image: matafuegosImage },
+        { id: 2, title: 'SODASTREAM', description: 'Venta y recarga de envases de sodastream y capsulas para sifones', image: sodaStreamImage },
+        { id: 3, title: 'GASES NO INFLAMABLES', description: 'Venta y recarga de gases para consumo o medicinal', image: tubosImage },
       ]
     };
+  },
+  computed: {
+    cardTitleStyle() {
+      return {
+        fontFamily: '"Bebas Neue", cursive',
+        fontWeight: 'bolder',
+        fontStyle: 'italic',
+        color: 'yellow'
+      };
+  },
+  descriptionStyle() {
+      return {
+        fontFamily: '"Bebas Neue", cursive',
+        fontWeight: 'bolder',
+        fontStyle: 'italic',
+        color: 'white'
+      };
+    }
+  },
+  methods: {
+    ctaAction() {
+      this.$router.push('/contacto');
+    },
+    hoverButton() {
+      this.buttonStyle = {
+        ...this.buttonStyle,
+        backgroundColor: '#ff5722',
+        color: '#ffffff',
+        borderColor: '#ff5722'
+      };
+    },
+    resetButton() {
+      this.buttonStyle = {
+        backgroundColor: 'black',
+        color: 'white',
+        borderColor: 'black'
+      };
+    }
   }
-};
+}
+
 </script>
 
 <style scoped>
 .v-card {
   margin-bottom: 20px;
+  position: relative;
+  overflow: hidden; /* Para ocultar el contenido fuera del área del card */
 }
 
 .card-height {
-  min-height: 300px;  
+  min-height: 300px;
+}
+
+.hover-card {
+  transition: transform 0.3s ease;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0; /* Oculta el contenido por defecto */
+  background: rgba(0, 0, 0, 0.5); /* Fondo oscuro para contraste */
+  transition: opacity 0.3s ease;
+}
+
+.hover-card:hover .card-content {
+  opacity: 1; /* Muestra el contenido al pasar el cursor */
+}
+
+.card-title,
+.card-subtitle,
+.card-text {
+  color: white; /* Color del texto para contraste con el fondo oscuro */
+  text-align: center; /* Alinea el texto en el centro */
 }
 </style>

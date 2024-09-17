@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import logo_noble from '@/assets/logo.png'; // Importa la imagen
+import logo_noble from '@/assets/about_img.jpg'; // Importa la imagen
 
 export default {
   name: 'AboutUs',

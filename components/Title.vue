@@ -1,5 +1,5 @@
 <template>
-    <h1 :style="titleStyle">{{ text }}</h1>
+    <h1> sobre nosotros</h1>
 </template>
 
 <script>

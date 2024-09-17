@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import co2Carousel from '@/assets/co2_carousel.jpg'; // Importa la imagen
+import logo_noble from '@/assets/logo.png'; // Importa la imagen
 
 export default {
   name: 'AboutUs',
@@ -34,7 +34,7 @@ export default {
   computed: {
     aboutUsImg() {
       return {
-        background: `radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.9) 100%), url(${co2Carousel})`,
+        background: `radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.9) 100%), url(${logo_noble})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         height: '100vh',

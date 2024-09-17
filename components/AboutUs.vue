@@ -1,11 +1,12 @@
 <template>
   <v-container class="about-us-section my-10">
     <v-row align="center">
+      <!-- Columna de imagen, con altura completa y centrado de contenido -->
       <v-col :style="aboutUsImg" fluid fill-height cols="12" md="6">
       </v-col>
-      <v-col cols="12" md="6">
-        <h2 class="font-weight-bold mb-4">{{ title }}</h2>
-        <p>{{ description }}</p>
+      <v-col cols="12" md="6" class="d-flex flex-column justify-center">
+        <h1 :style="titleStyle" class="text-center">{{ title }}</h1>
+        <p :style="subtitleStyle" class="text-center">{{ description }}</p>
         <v-btn color="primary" @click="learnMore">{{ learnMoreText }}</v-btn>
       </v-col>
     </v-row>
@@ -32,6 +33,21 @@ export default {
     }
   },
   computed: {
+    titleStyle() {
+      return {
+        fontFamily: '"Bebas Neue", cursive',
+        fontWeight: 'bolder',
+        fontStyle: 'italic',
+        color: 'yellow'
+      }
+    },
+    subtitleStyle() {
+      return {
+        fontFamily: '"Bebas Neue", cursive',
+        fontStyle: 'italic',
+        color: 'white'
+      };
+    },
     aboutUsImg() {
       return {
         background: `radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.9) 100%), url(${logo_noble})`,
@@ -44,18 +60,22 @@ export default {
         position: 'relative',
         border: '5px solid rgba(0, 0, 0, 0.9)'
       };
-    },
+    }
   },
   methods: {
     learnMore() {
       this.$router.push('/contacto');
     }
   }
-};
+}
 </script>
 
 <style scoped>
 .about-us-section {
   padding: 2rem 0;
+}
+
+.text-center {
+  text-align: center;
 }
 </style>

@@ -4,6 +4,7 @@
     <Title/>
     <AboutUs />
     <ServicesCard/>
+    <Location/>
     <BrandCarousel />
 </div>
 </template>
@@ -15,6 +16,7 @@ import AboutUs from '~/components/AboutUs.vue';
 import ServicesCard from '~/components/ServicesCard.vue';
 import BrandCarousel from '~/components/BrandCarousel.vue';
 import Title from '~/components/Title.vue';
+import Location from '~/components/Location.vue';
 
 export default {
     components: {
@@ -22,6 +24,7 @@ export default {
         Title,
         AboutUs,
         ServicesCard,
+        Location,
         BrandCarousel
     },
     

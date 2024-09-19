@@ -15,8 +15,13 @@ export default defineNuxtConfig({
 
   modules: ['@pinia/nuxt'],
 
+  plugins: [
+    '~/plugins/googleMaps.client.js',
+  ],
+
   runtimeConfig:{
-    MONGO_URI: process.env.MONGO_URI
+    MONGO_URI: process.env.MONGO_URI,
+    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
   },
 
   build:{

@@ -10,12 +10,14 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@fawmi/vue-google-maps": "^0.9.79",
     "@mdi/font": "^7.4.47",
     "@pinia/nuxt": "^0.5.4",
     "emailjs-com": "^3.2.0",
     "mongoose": "^8.5.4",
     "nuxt": "^3.13.0",
-    "sass": "^1.77.8"
+    "sass": "^1.77.8",
+    "vue3-google-map": "^0.21.0"
   },
   "devDependencies": {
     "pinia": "^2.2.2",

@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col v-for="service in services" :key="service.id" cols="12" md="4">
+      <v-col v-for="service in services" :key="service.id" cols="12" md="3">
         <v-card
           class="mx-auto card-height hover-card"
           color="surface-variant"
@@ -33,6 +33,7 @@
 import matafuegosImage from '@/assets/portada.extintores.jpg'
 import sodaStreamImage from '@/assets/soda.stream.2.png'
 import tubosImage from '@/assets/co2_tubos.jpg'
+import elemSeguridad from '@/assets/casco-construccion-seguridad-vista-superior-mascara-medica.jpg'
 
 export default {
   name: 'ServiceList',
@@ -45,9 +46,10 @@ export default {
   data() {
     return {
       services: [
-        { id: 1, title: 'EXTINTORES', description: 'Venta y recarga de extintores para la industria, comercio y hogar', image: matafuegosImage },
+        { id: 1, title: 'ELEMENTOS DE SEGURIDAD', description: 'Venta y recarga de extintores para la industria, comercio y hogar', image: elemSeguridad },
         { id: 2, title: 'SODASTREAM', description: 'Venta y recarga de envases de sodastream y capsulas para sifones', image: sodaStreamImage },
         { id: 3, title: 'GASES NO INFLAMABLES', description: 'Venta y recarga de gases para consumo o medicinal', image: tubosImage },
+        { id: 4, title: 'EXTINTORES', description: 'Venta y recarga de extintores para la industria, comercio y hogar', image: matafuegosImage },
       ],
       buttonStyle: {
         backgroundColor: 'black',

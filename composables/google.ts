@@ -1,8 +1,3 @@
-/**
- * Function will initialize Google Map with default settings
- *
- * @param map_html DOM HTML element in which Google Map will be initialized
- */
 export const initializeGoogleMap = (map_html: HTMLElement): void => {
     if (!useGoogleMapHTML().value) {
         console.error("google_map_html is not defined");
@@ -10,7 +5,7 @@ export const initializeGoogleMap = (map_html: HTMLElement): void => {
     }
 
     // Initialize Google Map
-    useGoogleMap().value = new google.maps.Map(map_html as HTMLElement, {
+    const googleMap = new google.maps.Map(map_html as HTMLElement, {
         center: { lat: -32.93495559692383, lng: -60.659671783447266 }, // Default map view position
         zoom: 17, // Default zoom
 
@@ -40,16 +35,7 @@ export const initializeGoogleMap = (map_html: HTMLElement): void => {
         gestureHandling: "greedy", // Does not need 2 fingers to move on map when using touchscreen (Not working on Firefox Mobile. Safari, not sure.)
         keyboardShortcuts: false,
     });
-};
 
-// Function used to center Google Map to specific coordinates
-export const centerGoogleMap = (lat: number, lng: number): void => {
-    const googleMap = useGoogleMap().value;
-
-    if (!googleMap) {
-        console.error("google_map is not defined");
-        return;
-    }
-
-    googleMap.setCenter({ lat, lng });
+    // Store the map instance in reactive state
+    useGoogleMap().value = googleMap;
 };

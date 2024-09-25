@@ -1,5 +1,5 @@
 <template>
-  <v-footer padless color="primary" dark>
+  <v-footer padless color="primary" white>
     <v-container>
       <v-row>
         <v-col cols="12" sm="6">
@@ -21,6 +21,7 @@
   </v-footer>
 </template>
 
+
 <script>
 export default {
   name: 'Footer',
@@ -28,7 +29,6 @@ export default {
 </script>
 
 <style scoped>
-.text-right {
-  text-align: right;
-}
+/* Exageradamente grande */
+
 </style>

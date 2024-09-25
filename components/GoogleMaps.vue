@@ -1,5 +1,8 @@
 <template>
   <div>
+    <h1>lalal</h1>
+  </div>
+  <div>
     <div ref="google_map" id="map"></div>
   </div>
 </template>

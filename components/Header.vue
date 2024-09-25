@@ -1,24 +1,37 @@
 <template>
-<v-app-bar app color="primary" dark>
-    <v-container>
-    <v-toolbar-title>
-        <router-link to="/" class="text-white">Mi Empresa</router-link>
-    </v-toolbar-title>
-    <v-spacer></v-spacer>
-    <v-btn text to="/" class="text-white">Inicio</v-btn>
-    <v-btn text to="/contacto" class="text-white">Contacto</v-btn>
-    </v-container>
-</v-app-bar>
+    <nav>
+        <v-toolbar>
+            <v-btn text to="/" flat color="white">
+                <span>Logo</span>
+            </v-btn>
+            <v-toolbar-title>
+                <router-link to="/" class="text-white">Matafuegos Noble</router-link>
+            </v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-btn text to="/" flat color="white">
+                <span>Inicio</span>
+            </v-btn>
+            <v-btn text to="/contacto" flat color="white">
+                <span>Contacto</span>
+            </v-btn>
+        </v-toolbar>
+    </nav>
 </template>
 
 <script>
 export default {
-name: 'Header',
+    name: 'Header',
 };
 </script>
 
 <style scoped>
 .text-white {
-color: white;
+    color: white;
 }
-</style>
+
+.buttons-container {
+    display: flex;
+    align-items: center; /* Asegura que los botones estén alineados verticalmente */
+    justify-content: flex-end; /* Alinea los botones a la derecha */
+}
+</style>  

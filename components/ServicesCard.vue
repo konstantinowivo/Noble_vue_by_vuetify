@@ -12,14 +12,8 @@
             <v-card-title :style="cardTitleStyle">{{ service.title }}</v-card-title>
             <v-card-text :style="descriptionStyle">{{ service.description }}</v-card-text>
             <v-card-actions>
-              <v-btn 
-                outlined 
-                :style="buttonStyle" 
-                @mouseover="hoverButton" 
-                @mouseleave="resetButton" 
-                @click="ctaAction"
-              >
-                {{ ctaText }}
+              <v-btn text to="/contacto" rounded="xl" :style="buttonStyle">
+                <span>{{ctaText}}</span>
               </v-btn>
             </v-card-actions>
           </div>
@@ -76,25 +70,6 @@ export default {
       };
     }
   },
-  methods: {
-    ctaAction() {
-      this.$router.push('/contacto');
-    },
-    hoverButton() {
-      this.buttonStyle = {
-        backgroundColor: '#ff5722',
-        color: '#ffffff',
-        borderColor: '#ff5722'
-      };
-    },
-    resetButton() {
-      this.buttonStyle = {
-        backgroundColor: 'black',
-        color: 'white',
-        borderColor: 'black'
-      };
-    }
-  }
 }
 </script>
 

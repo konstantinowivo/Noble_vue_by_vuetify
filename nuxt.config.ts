@@ -16,15 +16,7 @@ export default defineNuxtConfig({
   modules: ['@pinia/nuxt'],
 
   runtimeConfig: {
-    MONGO_URI: process.env.MONGO_URI,
-    googleMapKey: process.env.NUXT_GOOGLE_MAP_KEY,
-    firebaseKey: process.env.FIREBASE_API_KEY,
-    firebaseAuthDomain: process.env.FIREBASE_AUTH_DOMAIN,
-    firebaseProjectId: process.env.FIREBASE_PROJECT_ID,
-    firebaseStorageBucket: process.env.FIREBASE_BUCKET_STORAGE,
-    firebaseMessagingSenderId: process.env.FIREBASE_SENDER_MESSAGIN_ID,
-    firebaseAppId: process.env.FIREBASE_APP_ID,
-    firebaseMeasurementId: process.env.FIREBASE_MEASUREMENT_ID
+    MONGO_URI: process.env.MONGO_URI
   },
 
   build: {

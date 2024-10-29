@@ -26,17 +26,17 @@
             <v-app-bar-nav-icon @click="drawer = !drawer" class="d-md-none" color="yellow" />
 
             <!-- Botón de navegación sin overlay -->
-            <v-btn class="nav-button" to="/" :overlay="false">
+            <v-btn class="nav-button" href="/" :overlay="false">
                 <img src="../assets/title_nav.png" class="logo-image" alt="Logo" />
             </v-btn>
 
             <!-- Alinea los botones al extremo derecho -->
             <v-spacer></v-spacer>
             <div class="d-none d-md-flex" >
-                <v-btn class="nav-button" to="/" variant="text" :overlay="false">
+                <v-btn class="nav-button" href="/" variant="text" :overlay="false">
                     <span class="custom-text">Inicio</span>
                 </v-btn>
-                <v-btn class="nav-button" to="/contacto" variant="text" :overlay="false">
+                <v-btn class="nav-button" href="/contacto" variant="text" :overlay="false">
                     <span class="custom-text">Contacto</span>
                 </v-btn>
             </div>

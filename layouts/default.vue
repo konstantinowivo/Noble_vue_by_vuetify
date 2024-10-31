@@ -1,10 +1,10 @@
 <template>
     <v-app>
-      <Toolbar />
       <v-main>
+        <Toolbar />
         <NuxtPage />
+        <Footer />
       </v-main>
-      <Footer />
     </v-app>
 </template>
   

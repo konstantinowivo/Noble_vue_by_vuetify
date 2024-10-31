@@ -12,9 +12,6 @@ export default defineNuxtConfig({
     '@mdi/font/css/materialdesignicons.css'
   ],
 
-
-  modules: ['@pinia/nuxt'],
-
   runtimeConfig: {
     MONGO_URI: process.env.MONGO_URI
   },

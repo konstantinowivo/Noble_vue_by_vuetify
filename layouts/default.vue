@@ -1,6 +1,6 @@
 <template>
     <v-app>
-      <Header />
+      <Toolbar />
       <v-main>
         <NuxtPage />
       </v-main>
@@ -9,13 +9,14 @@
 </template>
   
 <script>
-import Header from '~/components/Header.vue';
+import Toolbar from '~/components/Toolbar.vue';
 import Footer from '~/components/Footer.vue';
 
 export default {
 components: {
-    Header,
+    Toolbar,
     Footer,
 }
 }
+
 </script>

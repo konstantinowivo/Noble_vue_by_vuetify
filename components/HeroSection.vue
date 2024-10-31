@@ -1,19 +1,8 @@
 <template>
-  <v-container fluid fill-height class="hero-container">
+  <v-container :style="heroStyle" fluid fill-height>
     <v-row align="center" justify="center">
-      <v-col
-        cols="12"
-        md="8"
-        class="text-center"
-        :style="contentStyle"
-      >
-        <v-btn
-          text
-          to="/contacto"
-          rounded="xl"
-          size="x-large"
-          :style="buttonStyle"
-        >
+      <v-col cols="12" md="8" class="text-center" :style="contentStyle">
+        <v-btn text to="/contacto" rounded="xl" size="x-large" :style="buttonStyle">
           <span>{{ ctaText }}</span>
         </v-btn>
       </v-col>
@@ -36,13 +25,15 @@ export default {
     heroStyle() {
       return {
         backgroundImage: `url(${portadaImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        height: '90vh',
+        backgroundSize: 'cover',  
+        backgroundPosition: 'center', 
+        height: '90vh', 
+        minHeight: '300px', 
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        position: 'relative'
+        position: 'relative',
+        overflow: 'hidden', 
       };
     },
     contentStyle() {
@@ -55,8 +46,7 @@ export default {
     },
     buttonStyle() {
       return {
-        marginTop: '70px',
-        fontSize: '1.5rem', 
+        marginTop: '70px'
       };
     }
   }
@@ -64,33 +54,31 @@ export default {
 </script>
 
 <style scoped>
+.logo-image {
+    max-width: 300px; 
+    height: auto;
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    font-family: 'Bebas Neue', cursive;
+    font-weight: bolder;
+    font-style: italic;
+    color: yellow;
+    font-size: 150%;
+    text-decoration: none; 
+}
+
+.v-app-bar-nav-icon {
+    margin-right: 16px;
+}
+
+.nav-button:deep(.v-btn__overlay) {
+    display: none;
+}
+
 .hero-container {
-  background-repeat: no-repeat;
-}
-
-
-@media (max-width: 768px) {
-  .hero-container {
-    height: 70vh; 
-  }
-
-  .hero-container .v-btn {
-    font-size: 1.2rem; 
-    margin-top: 30px; 
-  }
-
-  .hero-container .v-col {
-    padding: 10px; 
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-container {
-    height: 60vh; 
-  }
-
-  .hero-container .v-btn {
-    font-size: 1rem; 
-  }
+    background-repeat: no-repeat;
 }
 </style>

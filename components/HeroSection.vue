@@ -3,7 +3,7 @@
     <v-row align="center" justify="center">
       <v-col cols="12" md="8" class="text-center" :style="contentStyle">
         <v-btn text to="/contacto" rounded="xl" size="x-large" :style="buttonStyle">
-          <span>{{ctaText}}</span>
+          <span>{{ ctaText }}</span>
         </v-btn>
       </v-col>
     </v-row>
@@ -31,7 +31,10 @@ export default {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        position: 'relative'
+        position: 'relative',
+        '@media (max-width: 768px)': {
+          height: '70vh',
+        }
       };
     },
     contentStyle() {
@@ -50,3 +53,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+
+.hero-container {
+  background-repeat: no-repeat;
+}
+</style>

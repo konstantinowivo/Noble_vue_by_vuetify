@@ -2,18 +2,16 @@
   <v-container :style="heroStyle" fluid fill-height>
     <v-row align="center" justify="center">
       <v-col cols="12" md="8" class="text-center" :style="contentStyle">
-        <!-- Imagen de carga -->
+
         <v-img
           v-if="loading"
           :style="bannerLogoStyle"
         ></v-img>
 
-        <!-- Título y subtítulo en el centro -->
         <div v-else>
           <h1 class="hero-title">MATAFUEGOS NOBLE</h1>
           <h2 class="hero-subtitle">ofrecemos soluciones de calidad para tu empresa</h2>
           
-          <!-- Botón de llamada a la acción -->
           <v-btn text to="/contacto" rounded="xl" size="x-large" :style="buttonStyle">
             <span>{{ ctaText }}</span>
           </v-btn>
@@ -25,7 +23,7 @@
 
 <script>
 import portadaImage from '@/assets/BannerPortada.jpg';
-import logoBgRemoved from '@/assets/logo.bg.removed.png'; // Asegúrate de que esta ruta sea correcta
+import logoBgRemoved from '@/assets/logo.bg.removed.png'; 
 
 export default {
   name: 'HeroSection',  
@@ -81,21 +79,21 @@ export default {
     document.fonts.ready.then(() => {
       document.documentElement.classList.remove('font-loading');
       document.documentElement.classList.add('font-loaded');
-      this.loading = false; // Cambiamos el estado de carga cuando se cargan los estilos
+      this.loading = false; 
     });
   }
 };
 </script>
 
 <style scoped>
-/* Solución al FOUT: oculta el contenido hasta que cargue la fuente */
+
 .font-loading .hero-title, .font-loading .hero-subtitle {
   visibility: hidden;
 }
 
-/* Estilos del título y subtítulo */
+
 .hero-title {
-  font-size: 7rem; /* Tamaño original */
+  font-size: 7rem; 
   font-style: italic;
   font-weight: bold;
   font-family: 'Bebas Neue', cursive;
@@ -104,7 +102,7 @@ export default {
 }
 
 .hero-subtitle {
-  font-size: 2.3rem; /* Tamaño original */
+  font-size: 2.3rem;
   font-family: 'Bebas Neue', cursive;
   font-weight: 300;
   margin-top: 2px;
@@ -115,18 +113,17 @@ export default {
   font-size: 1.25rem;
 }
 
-/* Ajustes para tamaños de pantalla mediano o menores */
-@media (max-width: 960px) { /* Ajustar el tamaño según sea necesario */
+
+@media (max-width: 960px) { 
   .hero-title {
-    font-size: 4.9rem; /* 70% del tamaño original */
+    font-size: 4.5rem; 
   }
   
   .hero-subtitle {
-    font-size: 1.61rem; /* 70% del tamaño original */
+    font-size: 1.61rem; 
   }
 }
 
-/* Estilos adicionales del botón de navegación */
 .nav-button {
   display: flex;
   align-items: center;

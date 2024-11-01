@@ -1,5 +1,13 @@
 <template>
   <v-container>
+    <!-- Título y subtítulo -->
+    <v-row class="text-center">
+      <v-col cols="12">
+        <h1 :style="titleStyle">NUESTROS SERVICIOS</h1>
+        <p :style="subtitleStyle">deslizá el mouse sobre las imágenes y conocé más</p>
+      </v-col>
+    </v-row>
+
     <v-row>
       <v-col v-for="service in services" :key="service.id" cols="12" md="3">
         <v-card
@@ -13,7 +21,7 @@
             <v-card-text :style="descriptionStyle">{{ service.description }}</v-card-text>
             <v-card-actions>
               <v-btn text to="/contacto" rounded="xl" :style="buttonStyle">
-                <span>{{ctaText}}</span>
+                <span>{{ ctaText }}</span>
               </v-btn>
             </v-card-actions>
           </div>
@@ -24,10 +32,10 @@
 </template>
 
 <script>
-import matafuegosImage from '@/assets/portada.extintores.jpg'
-import sodaStreamImage from '@/assets/soda.stream.2.png'
-import tubosImage from '@/assets/co2_tubos.jpg'
-import elemSeguridad from '@/assets/casco-construccion-seguridad-vista-superior-mascara-medica.jpg'
+import matafuegosImage from '@/assets/portada.extintores.jpg';
+import sodaStreamImage from '@/assets/soda.stream.2.png';
+import tubosImage from '@/assets/co2_tubos.jpg';
+import elemSeguridad from '@/assets/casco-construccion-seguridad-vista-superior-mascara-medica.jpg';
 
 export default {
   name: 'ServiceList',
@@ -67,6 +75,23 @@ export default {
         fontWeight: 'bolder',
         fontStyle: 'italic',
         color: 'white'
+      };
+    },
+    titleStyle() {
+      return {
+        fontFamily: '"Bebas Neue", cursive',
+        fontWeight: 'bolder',
+        fontStyle: 'italic',
+        color: 'yellow',
+        fontSize: '4rem' // Estilo del título
+      };
+    },
+    subtitleStyle() {
+      return {
+        fontFamily: '"Bebas Neue", cursive',
+        fontStyle: 'italic',
+        color: 'white',
+        fontSize: '2rem' // Estilo del subtítulo
       };
     }
   },

@@ -1,41 +1,50 @@
 <template>
-  <v-form v-model="valid" ref="form" lazy-validation>
-    <v-text-field
-      v-model="from_name"
-      :rules="nameRules"
-      label="Nombre"
-      required
-    ></v-text-field>
+  <v-container>
+    <v-row class="text-center">
+      <v-col cols="12">
+        <h1 :style="titleStyle">CONTACTANOS</h1>
+        <h2 :style="subtitleStyle">PEDÍ TU PRESUPUESTO SIN CARGO!</h2> <!-- Subtítulo agregado -->
+      </v-col>
+    </v-row>
 
-    <v-text-field
-      v-model="email_id"
-      :rules="emailRules"
-      label="Email"
-      required
-    ></v-text-field>
+    <v-form v-model="valid" ref="form" lazy-validation>
+      <v-text-field
+        v-model="from_name"
+        :rules="nameRules"
+        label="Nombre"
+        required
+      ></v-text-field>
 
-    <v-textarea
-      v-model="message"
-      :rules="messageRules"
-      label="Mensaje"
-      rows="4"
-      required
-    ></v-textarea>
+      <v-text-field
+        v-model="email_id"
+        :rules="emailRules"
+        label="Email"
+        required
+      ></v-text-field>
 
-    <v-btn :disabled="!valid" @click="submit">
-      Enviar
-    </v-btn>
+      <v-textarea
+        v-model="message"
+        :rules="messageRules"
+        label="Mensaje"
+        rows="4"
+        required
+      ></v-textarea>
 
-    <v-dialog v-model="showModal" max-width="400">
-      <v-card>
-        <v-card-title class="headline">Correo enviado</v-card-title>
-        <v-card-text>Tu correo ha sido enviado correctamente.</v-card-text>
-        <v-card-actions>
-          <v-btn color="primary" text @click="showModal = false">Cerrar</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </v-form>
+      <v-btn :disabled="!valid" @click="submit">
+        Enviar
+      </v-btn>
+
+      <v-dialog v-model="showModal" max-width="400">
+        <v-card>
+          <v-card-title class="headline">Correo enviado</v-card-title>
+          <v-card-text>Tu correo ha sido enviado correctamente.</v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" text @click="showModal = false">Cerrar</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-form>
+  </v-container>
 </template>
 
 <script>
@@ -49,7 +58,7 @@ export default {
       from_name: '',
       email_id: '',
       message: '',
-      showModal: false, 
+      showModal: false,
       nameRules: [
         v => !!v || 'El nombre es requerido',
         v => (v && v.length <= 50) || 'El nombre debe tener menos de 50 caracteres',
@@ -64,6 +73,26 @@ export default {
       ],
     };
   },
+  computed: {
+    titleStyle() {
+      return {
+        fontFamily: '"Bebas Neue", cursive',
+        fontWeight: 'bolder',
+        fontStyle: 'italic',
+        color: 'yellow',
+        fontSize: '3.9rem' // Título 10% más pequeño
+      };
+    },
+    subtitleStyle() {
+      return {
+        fontFamily: '"Bebas Neue", cursive',
+        fontStyle: 'italic',
+        color: 'white',
+        fontSize: '2rem',
+        marginBottom: '3rem', // Margin bottom agregado
+      };
+    }
+  },
   methods: {
     submit() {
       if (this.$refs.form.validate()) {
@@ -77,8 +106,8 @@ export default {
           .send('service_6slf0ka', 'template_lo3v4hb', templateParams, '8Kp9zy0H--xYV5imf')
           .then(
             response => {
-              this.clearForm(); // Limpiar el formulario después del envío
-              this.showModal = true; // Mostrar el modal
+              this.clearForm();
+              this.showModal = true;
               console.log('SUCCESS!', response.status, response.text);
             },
             err => {
@@ -92,7 +121,7 @@ export default {
       this.from_name = '';
       this.email_id = '';
       this.message = '';
-      this.$refs.form.resetValidation(); 
+      this.$refs.form.resetValidation();
     },
   },
 };

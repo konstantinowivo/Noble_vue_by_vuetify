@@ -29,7 +29,6 @@
         
         <div class="d-none d-md-flex">
             <nuxt-link to="/" class="nav-button">Inicio</nuxt-link>
-            <v-spacer></v-spacer> 
             <nuxt-link to="/contacto" class="nav-button">Contacto</nuxt-link>
         </div>
     </v-app-bar>

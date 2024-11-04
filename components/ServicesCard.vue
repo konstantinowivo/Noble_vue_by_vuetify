@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <!-- Título y subtítulo -->
+
     <v-row class="text-center">
       <v-col cols="12">
         <h1 :style="titleStyle">NUESTROS SERVICIOS</h1>
@@ -34,7 +34,7 @@
 <script>
 import matafuegosImage from '@/assets/portada.extintores.jpg';
 import sodaStreamImage from '@/assets/soda.stream.2.png';
-import tubosImage from '@/assets/co2_tubos.jpg';
+import tubosImage from '@/assets/co2_tubos.png';
 import elemSeguridad from '@/assets/casco-construccion-seguridad-vista-superior-mascara-medica.jpg';
 
 export default {
@@ -48,10 +48,10 @@ export default {
   data() {
     return {
       services: [
-        { id: 1, title: 'ELEMENTOS DE SEGURIDAD', description: 'Venta y recarga de extintores para la industria, comercio y hogar', image: elemSeguridad },
-        { id: 2, title: 'SODASTREAM', description: 'Venta y recarga de envases de sodastream y capsulas para sifones', image: sodaStreamImage },
-        { id: 3, title: 'GASES NO INFLAMABLES', description: 'Venta y recarga de gases para consumo o medicinal', image: tubosImage },
-        { id: 4, title: 'EXTINTORES', description: 'Venta y recarga de extintores para la industria, comercio y hogar', image: matafuegosImage },
+        { id: 1, title: 'ELEMENTOS DE SEGURIDAD', description: 'Venta y asesoría en seguridad, cartelería y equipos para habilitaciones comerciales.', image: elemSeguridad },
+        { id: 2, title: 'CAPSULAS Y SODASTREAM', description: 'Venta y recarga de envases de SodaStream y cápsulas para sifones. Trabajamos con todas las marcas.', image: sodaStreamImage },
+        { id: 3, title: 'GASES PARA CONSUMO', description: 'Brindamos asesorias, venta y servicio de post-venta para tus instalaciones de maquinas de cerveza, gaseosa o soda.', image: tubosImage },
+        { id: 4, title: 'EXTINTORES', description: 'Más de 30 años de experiencia, nos avalan en servicio de ventas y recarga anual de extintores. Atención a empresas, comercios y particulares. ', image: matafuegosImage },
       ],
       buttonStyle: {
         backgroundColor: 'black',
@@ -61,29 +61,31 @@ export default {
     };
   },
   computed: {
-    cardTitleStyle() {
-      return {
-        fontFamily: '"Bebas Neue", cursive',
-        fontWeight: 'bolder',
-        fontStyle: 'italic',
-        color: 'yellow'
-      };
-    },
-    descriptionStyle() {
-      return {
-        fontFamily: '"Bebas Neue", cursive',
-        fontWeight: 'bolder',
-        fontStyle: 'italic',
-        color: 'white'
-      };
-    },
+  cardTitleStyle() {
+    return {
+      fontFamily: '"Bebas Neue", cursive',
+      fontWeight: 'bolder',
+      fontStyle: 'italic',
+      color: 'yellow',
+      fontSize: '1.8rem'
+    };
+  },
+  descriptionStyle() {
+    return {
+      fontFamily: '"Bebas Neue", cursive',
+      fontWeight: 'bolder',
+      fontStyle: 'italic',
+      color: 'white',
+      fontSize: '1.4rem' 
+    };
+  },
     titleStyle() {
       return {
         fontFamily: '"Bebas Neue", cursive',
         fontWeight: 'bolder',
         fontStyle: 'italic',
         color: 'yellow',
-        fontSize: '4rem' // Estilo del título
+        fontSize: '4rem' 
       };
     },
     subtitleStyle() {
@@ -91,7 +93,7 @@ export default {
         fontFamily: '"Bebas Neue", cursive',
         fontStyle: 'italic',
         color: 'white',
-        fontSize: '2rem' // Estilo del subtítulo
+        fontSize: '2rem' 
       };
     }
   },
@@ -102,7 +104,7 @@ export default {
 .v-card {
   margin-bottom: 20px;
   position: relative;
-  overflow: hidden; /* Para ocultar el contenido fuera del área del card */
+  overflow: hidden; 
 }
 
 .card-height {
@@ -116,26 +118,26 @@ export default {
 .card-content {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centra verticalmente */
-  align-items: center; /* Centra horizontalmente */
+  justify-content: center;
+  align-items: center; 
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  opacity: 0; /* Oculta el contenido por defecto */
-  background: rgba(0, 0, 0, 0.5); /* Fondo oscuro para contraste */
+  opacity: 0; 
+  background: rgba(0, 0, 0, 0.5); 
   transition: opacity 0.3s ease;
 }
 
 .hover-card:hover .card-content {
-  opacity: 1; /* Muestra el contenido al pasar el cursor */
+  opacity: 1; 
 }
 
 .card-title,
 .card-text {
-  color: white; /* Color del texto para contraste con el fondo oscuro */
-  text-align: center; /* Alinea el texto en el centro */
+  color: white; 
+  text-align: center; 
 }
 </style>

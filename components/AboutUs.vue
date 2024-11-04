@@ -1,22 +1,21 @@
 <template>
   <v-container class="about-us-section my-10">
-      <!-- Columna de texto, centrada y apilada -->
-      <v-col class="text-center">
+    <v-row>
+      <v-col class="text-center" cols="12">
         <h1 :style="titleStyle">{{ title }}</h1>
         <p :style="subtitleStyle">{{ description }}</p>
       </v-col>
 
-      <!-- Columna de imagen, con fondo y estilos -->
       <v-col class="image-column" cols="12">
         <div :style="aboutUsImg"></div>
-        <p class="description-text">{{ descriptionText }}</p>
+        <p :style="descriptionTextStyle">{{ descriptionText }}</p>
       </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
-import logo_noble from '@/assets/store.jpg'; // Importa la imagen
-
+import logo_noble from '@/assets/store.jpg'; 
 export default {
   name: 'AboutUs',
   props: {
@@ -26,11 +25,11 @@ export default {
     },
     description: {
       type: String,
-      default: 'Somos una empresa...'
+      default: 'Tu confianza, nuestra empresa'
     },
     descriptionText: {
       type: String,
-      default: 'Fundada en 2001, nuestra misión...'
+      default: 'En Matafuegos Noble, empresa fundada en 2001, nuestra misión es proporcionar servicios de recarga de extintores, gases para consumo y venta de elementos de seguridad industrial de la más alta calidad. Con más de 30 años de experiencia en el rubro, nos comprometemos a garantizar la seguridad y tranquilidad de nuestros clientes, ofreciendo asesoría personalizada y especializada, junto con productos que cumplen con los estándares de regulación, IRAM y Bureau Veritas.'
     }
   },
   computed: {
@@ -40,7 +39,7 @@ export default {
         fontWeight: 'bolder',
         fontStyle: 'italic',
         color: 'yellow',
-        fontSize: '4rem' // Tamaño del título aumentado
+        fontSize: '4rem' 
       };
     },
     subtitleStyle() {
@@ -48,22 +47,28 @@ export default {
         fontFamily: '"Bebas Neue", cursive',
         fontStyle: 'italic',
         color: 'white',
-        fontSize: '2rem' // Tamaño de la descripción aumentado
+        fontSize: '2rem'
+      };
+    },
+    descriptionTextStyle() {
+      return {
+        fontFamily: '"Alumni Sans Pinstripe", sans-serif',
+        fontWeight: '400',
+        fontStyle: 'normal',
+        color: 'white',
+        fontSize: '1.3rem'
       };
     },
     aboutUsImg() {
       return {
         background: `radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.9)), url(${logo_noble})`,
-        height: '50vh', // Cambia la altura a 50vh o ajusta según sea necesario
-        marginBottom: '1rem' // Espaciado entre la imagen y el texto
+        height: '50vh',
+        marginBottom: '3rem',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
       };
     }
   },
-  methods: {
-    learnMore() {
-      this.$router.push('/contacto');
-    }
-  }
 }
 </script>
 
@@ -76,21 +81,20 @@ export default {
   text-align: center;
 }
 
-/* Estilos para pantallas medianas o más pequeñas */
 @media (max-width: 960px) {
   .about-us-section {
-    padding: 1rem 0; /* Reduce el padding para pantallas más pequeñas */
+    padding: 1rem 0; 
   }
 
   .image-column {
-    height: auto; /* Permite que la columna de imagen ajuste su altura automáticamente */
+    height: auto; 
   }
 
   .description-text {
     margin-top: 1rem;
-    font-size: 1.5rem; /* Ajusta el tamaño según lo necesites */
-    color: white; /* O el color que prefieras */
-    text-align: center; /* Asegúrate de que el texto esté centrado */
+    font-size: 1.5rem; 
+    color: white; 
+    text-align: center; 
   }
 }
 </style>

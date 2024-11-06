@@ -1,6 +1,6 @@
 <template>
   <v-container class="about-us-section my-10">
-    <v-row>
+    <v-row no-gutters>
       <v-col class="text-center">
         <h1 :style="titleStyle">{{ title }}</h1>
         <p :style="subtitleStyle">{{ description }}</p>
@@ -58,9 +58,9 @@ export default {
         color: 'white',
         fontSize: '1.3rem',
         textAlign: 'center',
-        maxWidth: '80%', 
-        margin: 'auto', 
-        padding: '1rem' 
+        maxWidth: '80%',
+        margin: 'auto',
+        padding: '1rem'
       };
     },
     aboutUsImg() {
@@ -78,7 +78,7 @@ export default {
 
 <style scoped>
 .about-us-section {
-  padding: 2rem 0;
+  padding: 2rem 0; /* Consistencia en el padding */
 }
 
 .text-center {
@@ -87,19 +87,22 @@ export default {
 
 @media (max-width: 960px) {
   .about-us-section {
-    padding: 1rem 0; 
+    padding: 2rem 0; /* Sin cambios en el padding */
   }
 
   .image-column {
-    height: auto; 
+    height: auto;
+    margin-bottom: 1rem; /* Ajustar el margen de la imagen */
   }
 
   .description-text {
     margin-top: 1rem;
-    font-size: 1.5rem; 
-    color: white; 
-    text-align: center; 
-    max-width: 90%; 
+    font-size: 1.5rem;
+    color: white;
+    text-align: center;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto; /* Centrado del texto */
   }
 }
 </style>

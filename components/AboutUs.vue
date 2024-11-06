@@ -2,17 +2,17 @@
   <v-container class="about-us-section my-10">
     <v-row no-gutters class="text-center">
       <v-col cols="12">
-        <h1 :style="titleStyle">{{ title }}</h1>
-        <h2 :style="subtitleStyle">{{ description }}</h2>
-        <div :style="aboutUsImg"></div>
-        <p :style="descriptionTextStyle" class="description-text">{{ descriptionText }}</p>
+        <h1 :style="titleStyle" class="fade-in">{{ title }}</h1>
+        <h2 :style="subtitleStyle" class="slide-in">{{ description }}</h2>
+        <div :style="aboutUsImg" class="parallax-bg"></div>
+        <p :style="descriptionTextStyle" class="description-text fade-in-delay">{{ descriptionText }}</p>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import logo_noble from '@/assets/store.jpg'; 
+import frente_noble from '@/assets/frente_noble2.jpg';
 export default {
   name: 'AboutUs',
   props: {
@@ -36,7 +36,7 @@ export default {
         fontWeight: 'bolder',
         fontStyle: 'italic',
         color: 'yellow',
-        fontSize: '3.9rem',  // Ajustado al tamaño del componente "Contáctanos"
+        fontSize: '3.9rem',
       };
     },
     subtitleStyle() {
@@ -45,7 +45,7 @@ export default {
         fontStyle: 'italic',
         color: 'white',
         fontSize: '2rem',
-        marginBottom: '3rem', // Margen ajustado como en "Contáctanos"
+        marginBottom: '3rem',
       };
     },
     descriptionTextStyle() {
@@ -61,25 +61,64 @@ export default {
       };
     },
     aboutUsImg() {
-      return {
-        background: `radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.9)), url(${logo_noble})`,
-        height: '50vh',
-        marginBottom: '3rem',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      };
-    }
-  },
-}
+  return {
+    background: `radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.7)), url(${frente_noble})`,
+    height: '100vh',   // Altura completa para la imagen
+    width: '80%',      // Ancho del 80% para que el contenedor sea un 20% más pequeño
+    margin: '0 auto',  // Centrar horizontalmente
+    marginBottom: '3rem',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center center',
+    backgroundRepeat: 'no-repeat',
+    transition: 'transform 0.3s ease-out',
+    borderRadius: '10px'  // Opcional: bordes redondeados para darle un toque moderno
+    };
+  }
+  }
+};
 </script>
 
 <style scoped>
 .about-us-section {
   padding: 2rem 0;
+  position: relative;
+  overflow: hidden;
 }
 
-.text-center {
-  text-align: center;
+/* Fade-in animation */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+}
+
+.fade-in-delay {
+  opacity: 0;
+  animation: fadeIn 1.5s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Slide-in animation for subtitle */
+.slide-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideIn 1s forwards;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Parallax effect on the image background */
+.parallax-bg {
+  will-change: transform;
 }
 
 @media (max-width: 960px) {

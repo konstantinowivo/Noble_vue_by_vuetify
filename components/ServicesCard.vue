@@ -51,7 +51,7 @@ export default {
         { id: 1, title: 'ELEMENTOS DE SEGURIDAD', description: 'Venta y asesoría en seguridad, cartelería y equipos para habilitaciones comerciales.', image: elemSeguridad },
         { id: 2, title: 'CAPSULAS Y SODASTREAM', description: 'Venta y recarga de envases de SodaStream y cápsulas para sifones. Trabajamos con todas las marcas.', image: sodaStreamImage },
         { id: 3, title: 'GASES PARA CONSUMO', description: 'Brindamos asesorias, venta y servicio de post-venta para tus instalaciones de maquinas de cerveza, gaseosa o soda.', image: tubosImage },
-        { id: 4, title: 'EXTINTORES', description: 'Más de 30 años de experiencia, nos avalan en servicio de ventas y recarga anual de extintores. Atención a empresas, comercios y particulares. ', image: matafuegosImage },
+        { id: 4, title: 'EXTINTORES', description: 'Venta y recarga anual de extintores. Atención a empresas, comercios y particulares. ', image: matafuegosImage },
       ],
       buttonStyle: {
         backgroundColor: 'black',

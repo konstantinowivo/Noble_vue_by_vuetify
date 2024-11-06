@@ -8,7 +8,7 @@
 
       <v-col class="image-column" cols="12">
         <div :style="aboutUsImg"></div>
-        <p :style="descriptionTextStyle">{{ descriptionText }}</p>
+        <p :style="descriptionTextStyle" class="description-text">{{ descriptionText }}</p>
       </v-col>
     </v-row>
   </v-container>
@@ -56,7 +56,11 @@ export default {
         fontWeight: '400',
         fontStyle: 'normal',
         color: 'white',
-        fontSize: '1.3rem'
+        fontSize: '1.3rem',
+        textAlign: 'center',
+        maxWidth: '80%', /* Limita el ancho para que no exceda la imagen */
+        margin: 'auto', /* Centra el texto horizontalmente */
+        padding: '1rem' /* Añade espacio alrededor del texto */
       };
     },
     aboutUsImg() {
@@ -95,6 +99,7 @@ export default {
     font-size: 1.5rem; 
     color: white; 
     text-align: center; 
+    max-width: 90%; /* Ajusta el ancho en pantallas pequeñas */
   }
 }
 </style>

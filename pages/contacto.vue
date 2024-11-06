@@ -8,8 +8,8 @@
         <v-card class="mt-5">
         <v-card-title>Información de Contacto</v-card-title>
         <v-card-text>
-            <p><strong>Dirección:</strong> Ov. Lagos 182</p>
-            <p><strong>Teléfono:</strong> 0341-4390318</p>
+            <p><strong>Dirección:</strong> Ov. Lagos 182 (Rosario - Santa Fé)</p>
+            <p><strong>Teléfono:</strong> 0341-4390318 / 3413052540</p>
             <p><strong>Email:</strong> matafuegosnoble@hotmail.com</p>
         </v-card-text>
         </v-card>

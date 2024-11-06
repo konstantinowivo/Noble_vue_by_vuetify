@@ -1,10 +1,10 @@
 <template>
   <v-container class="about-us-section my-10">
-    <v-row no-gutters justify="center" align="center">
-      <v-col class="text-center" cols="12">
+    <v-row no-gutters class="text-center">
+      <v-col cols="12">
         <h1 :style="titleStyle">{{ title }}</h1>
-        <p :style="subtitleStyle">{{ description }}</p>
-        <div :style="aboutUsImg"></div> <!-- Imagen extendida -->
+        <h2 :style="subtitleStyle">{{ description }}</h2>
+        <div :style="aboutUsImg"></div>
         <p :style="descriptionTextStyle" class="description-text">{{ descriptionText }}</p>
       </v-col>
     </v-row>
@@ -36,7 +36,7 @@ export default {
         fontWeight: 'bolder',
         fontStyle: 'italic',
         color: 'yellow',
-        fontSize: '4rem' 
+        fontSize: '3.9rem',  // Ajustado al tamaño del componente "Contáctanos"
       };
     },
     subtitleStyle() {
@@ -45,30 +45,28 @@ export default {
         fontStyle: 'italic',
         color: 'white',
         fontSize: '2rem',
-        padding: '1.5rem'
+        marginBottom: '3rem', // Margen ajustado como en "Contáctanos"
       };
     },
     descriptionTextStyle() {
       return {
         fontFamily: '"Alumni Sans Pinstripe", sans-serif',
         fontWeight: '400',
-        fontStyle: 'normal',
         color: 'white',
         fontSize: '1.3rem',
         textAlign: 'center',
         maxWidth: '80%',
         margin: 'auto',
-        padding: '1rem'
+        padding: '1rem',
       };
     },
     aboutUsImg() {
       return {
         background: `radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.9)), url(${logo_noble})`,
-        width: '100vw',        /* Asegura que la imagen ocupe todo el ancho */
-        height: '50vh',        /* La imagen tiene un alto adecuado */
+        height: '50vh',
         marginBottom: '3rem',
         backgroundSize: 'cover',
-        backgroundPosition: 'center'
+        backgroundPosition: 'center',
       };
     }
   },
@@ -77,7 +75,7 @@ export default {
 
 <style scoped>
 .about-us-section {
-  padding: 2rem 0; /* Consistencia en el padding */
+  padding: 2rem 0;
 }
 
 .text-center {
@@ -85,23 +83,9 @@ export default {
 }
 
 @media (max-width: 960px) {
-  .about-us-section {
-    padding: 2rem 0; /* Sin cambios en el padding */
-  }
-
-  .image-column {
-    height: auto;
-    margin-bottom: 1rem; /* Ajustar el margen de la imagen */
-  }
-
   .description-text {
-    margin-top: 1rem;
     font-size: 1.5rem;
-    color: white;
-    text-align: center;
     max-width: 90%;
-    margin-left: auto;
-    margin-right: auto; /* Centrado del texto */
   }
 }
 </style>

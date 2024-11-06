@@ -3,7 +3,7 @@
     <v-row class="text-center">
       <v-col cols="12">
         <h1 :style="titleStyle">CONTACTANOS</h1>
-        <h2 :style="subtitleStyle">PEDÍ TU PRESUPUESTO SIN CARGO!</h2> <!-- Subtítulo agregado -->
+        <h2 :style="subtitleStyle">PEDÍ TU PRESUPUESTO SIN CARGO!</h2> 
       </v-col>
     </v-row>
 
@@ -80,7 +80,7 @@ export default {
         fontWeight: 'bolder',
         fontStyle: 'italic',
         color: 'yellow',
-        fontSize: '3.9rem' // Título 10% más pequeño
+        fontSize: '3.9rem' 
       };
     },
     subtitleStyle() {
@@ -89,7 +89,7 @@ export default {
         fontStyle: 'italic',
         color: 'white',
         fontSize: '2rem',
-        marginBottom: '3rem', // Margin bottom agregado
+        marginBottom: '3rem', 
       };
     }
   },

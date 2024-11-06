@@ -1,13 +1,14 @@
 <template>
   <v-container class="about-us-section my-10">
     <v-row>
-      <v-col class="text-center" cols="12">
+      <v-col class="text-center">
         <h1 :style="titleStyle">{{ title }}</h1>
         <p :style="subtitleStyle">{{ description }}</p>
       </v-col>
 
-      <v-col class="image-column" cols="12">
+      <v-col class="image-column">
         <div :style="aboutUsImg"></div>
+        <p :style="descriptionTextStyle" class="description-text">{{ descriptionText }}</p>
       </v-col>
     </v-row>
   </v-container>
@@ -58,6 +59,7 @@ export default {
         fontSize: '1.3rem',
         textAlign: 'center',
         maxWidth: '80%', 
+        margin: 'auto', 
         padding: '1rem' 
       };
     },

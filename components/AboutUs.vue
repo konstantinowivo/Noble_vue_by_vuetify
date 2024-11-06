@@ -1,13 +1,10 @@
 <template>
   <v-container class="about-us-section my-10">
-    <v-row no-gutters>
-      <v-col class="text-center">
+    <v-row no-gutters justify="center" align="center">
+      <v-col class="text-center" cols="12">
         <h1 :style="titleStyle">{{ title }}</h1>
         <p :style="subtitleStyle">{{ description }}</p>
-      </v-col>
-
-      <v-col class="image-column">
-        <div :style="aboutUsImg"></div>
+        <div :style="aboutUsImg"></div> <!-- Imagen extendida -->
         <p :style="descriptionTextStyle" class="description-text">{{ descriptionText }}</p>
       </v-col>
     </v-row>
@@ -47,7 +44,8 @@ export default {
         fontFamily: '"Bebas Neue", cursive',
         fontStyle: 'italic',
         color: 'white',
-        fontSize: '2rem'
+        fontSize: '2rem',
+        padding: '1.5rem'
       };
     },
     descriptionTextStyle() {
@@ -66,7 +64,8 @@ export default {
     aboutUsImg() {
       return {
         background: `radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.9)), url(${logo_noble})`,
-        height: '50vh',
+        width: '100vw',        /* Asegura que la imagen ocupe todo el ancho */
+        height: '50vh',        /* La imagen tiene un alto adecuado */
         marginBottom: '3rem',
         backgroundSize: 'cover',
         backgroundPosition: 'center'

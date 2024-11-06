@@ -58,7 +58,6 @@ export default {
         fontSize: '1.3rem',
         textAlign: 'center',
         maxWidth: '80%', 
-        margin: 'auto', 
         padding: '1rem' 
       };
     },

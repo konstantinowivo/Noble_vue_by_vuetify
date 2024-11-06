@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import frente_noble from '@/assets/frente_noble2.jpg';
+import frente_noble from '@/assets/frente_noble2.jpg'; 
 export default {
   name: 'AboutUs',
   props: {
@@ -61,19 +61,19 @@ export default {
       };
     },
     aboutUsImg() {
-  return {
-    background: `radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.7)), url(${frente_noble})`,
-    height: '100vh',   // Altura completa para la imagen
-    width: '80%',      // Ancho del 80% para que el contenedor sea un 20% más pequeño
-    margin: '0 auto',  // Centrar horizontalmente
-    marginBottom: '3rem',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center center',
-    backgroundRepeat: 'no-repeat',
-    transition: 'transform 0.3s ease-out',
-    borderRadius: '10px'  // Opcional: bordes redondeados para darle un toque moderno
-    };
-  }
+      return {
+        background: `radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.7)), url(${frente_noble})`,
+        height: '100vh',  
+        width: '80%',      
+        margin: '0 auto',  
+        marginBottom: '3rem',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center center',
+        backgroundRepeat: 'no-repeat',
+        transition: 'transform 0.3s ease-out',
+        borderRadius: '10px' 
+      };
+    }
   }
 };
 </script>
@@ -85,7 +85,7 @@ export default {
   overflow: hidden;
 }
 
-/* Fade-in animation */
+
 .fade-in {
   opacity: 0;
   animation: fadeIn 1s forwards;
@@ -102,7 +102,7 @@ export default {
   }
 }
 
-/* Slide-in animation for subtitle */
+
 .slide-in {
   opacity: 0;
   transform: translateY(20px);
@@ -116,7 +116,7 @@ export default {
   }
 }
 
-/* Parallax effect on the image background */
+
 .parallax-bg {
   will-change: transform;
 }
@@ -125,6 +125,11 @@ export default {
   .description-text {
     font-size: 1.5rem;
     max-width: 90%;
+  }
+
+
+  .parallax-bg {
+    height: 80vh;  
   }
 }
 </style>

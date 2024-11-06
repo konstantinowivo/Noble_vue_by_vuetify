@@ -1,4 +1,3 @@
-<!-- /components/WhatsAppButton.vue -->
 <template>
 <a
     href="https://wa.me/543415325391" 
@@ -26,6 +25,13 @@
 .whatsapp-button img {
     width: 60px; 
     height: 60px;
+}
+
+@media (max-width: 960px) {
+.whatsapp-button {
+    right: auto;  
+    left: 20px; 
+}
 }
 
 </style>

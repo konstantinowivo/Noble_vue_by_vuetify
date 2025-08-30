@@ -1,5 +1,5 @@
 <template>
-  <section class="services-section" ref="sectionRef">
+  <section class="services-section fade-edge" ref="sectionRef">
     <!-- Background -->
     <div class="background-overlay"></div>
     <div class="particles-container">
@@ -80,7 +80,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import matafuegosImage from '@/assets/portada.extintores.jpg'
 import sodaStreamImage from '@/assets/soda.stream.2.png'
-import tubosImage from '@/assets/co2_tubos.png'
+import instalacionImage from '@/assets/instalaciones.png'
 import elemSeguridad from '@/assets/casco-construccion-seguridad-vista-superior-mascara-medica.jpg'
 
 const router = useRouter()
@@ -90,10 +90,10 @@ const hoveredCard = ref(-1)
 let observer = null
 
 const services = [
-  { id: 1, title: 'ELEMENTOS DE SEGURIDAD', description: 'Venta y asesoría en seguridad...', image: elemSeguridad, icon: '🛡️' },
-  { id: 2, title: 'CÁPSULAS Y SODASTREAM', description: 'Venta y recarga de envases...', image: sodaStreamImage, icon: '💧' },
-  { id: 3, title: 'GASES PARA CONSUMO', description: 'Brindamos asesoría, venta y servicio...', image: tubosImage, icon: '🍺' },
-  { id: 4, title: 'EXTINTORES', description: 'Venta y recarga anual de extintores...', image: matafuegosImage, icon: '🧯' }
+  { id: 1, title: 'ELEMENTOS DE SEGURIDAD', description: 'Venta y asesoría en seguridad...', image: elemSeguridad},
+  { id: 2, title: 'CÁPSULAS Y SODASTREAM', description: 'Venta y recarga de envases...', image: sodaStreamImage},
+  { id: 3, title: 'GASES PARA CONSUMO', description: 'Brindamos asesoría, venta y servicio...', image: instalacionImage},
+  { id: 4, title: 'EXTINTORES', description: 'Venta y recarga anual de extintores...', image: matafuegosImage}
 ]
 
 const ctaText = 'Contactanos'
@@ -124,13 +124,20 @@ onUnmounted(() => observer && observer.disconnect())
   position: relative;
   min-height: 100vh;
   padding: 80px 20px;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: linear-gradient(135deg, #1f2937 0%, #000000 40%, #111827 100%);
-}
 
+  /* Fade solo para el contenido que no son cards */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+  overflow: visible; /* permite que las cards queden fuera del fade */
+}
 /* Fondo */
 .background-overlay {
   position: absolute;
@@ -248,7 +255,7 @@ onUnmounted(() => observer && observer.disconnect())
 /* Grid de servicios */
 .services-grid {
   position: relative;
-  z-index: 5;
+  z-index: 10; /* más alto que el fade */
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 32px;
@@ -275,7 +282,6 @@ onUnmounted(() => observer && observer.disconnect())
   inset: 0;
   background-size: cover;
   background-position: center;
-  filter: brightness(0.5);
   transition: transform 0.5s ease;
 }
 .service-card:hover .card-background {
@@ -359,5 +365,18 @@ onUnmounted(() => observer && observer.disconnect())
 .button-arrow {
   width: 16px;
   height: 16px;
+}
+
+.fade-edge {
+  /* Aplica un fade al inicio y final de la sección */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+
+  /* Para navegadores que no soportan mask, fallback */
+  background-clip: content-box;
 }
 </style>

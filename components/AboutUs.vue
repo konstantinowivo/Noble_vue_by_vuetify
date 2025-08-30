@@ -1,7 +1,7 @@
 <template>
   <section 
     ref="sectionRef"
-    class="about-us-modern"
+    class="about-us-modern fade-edge"
     @mousemove="handleMouseMove"
   >
     <!-- Background with parallax effect -->
@@ -30,13 +30,10 @@
 
     <!-- Content container -->
     <div class="content-container">
-      <!-- Title -->
-      <h1 
-        class="main-title"
-        :class="{ 'visible': isVisible }"
-      >
-        {{ title }}
-      </h1>
+      <Titulo 
+        :text="title"   
+        :visible="isVisible"
+      />
 
       <!-- Subtitle -->
       <h2 
@@ -72,21 +69,19 @@
         <span>Scroll para conocer más</span>
         <div class="scroll-arrow" />
       </div>
+      
     </div>
   </section>
 </template>
 
 <script>
 import { ref, onMounted, onUnmounted, reactive } from 'vue'
-import frente_noble from '@/assets/frente_noble2.jpg'
+import Title from './Title.vue'
 
 export default {
   name: 'AboutUs',
   props: {
-    title: {
-      type: String,
-      default: 'Sobre Nosotros'
-    },
+    
     description: {
       type: String,
       default: 'Tu confianza, nuestra empresa'
@@ -94,12 +89,9 @@ export default {
     descriptionText: {
       type: String,
       default: 'En Matafuegos Noble, empresa fundada en 2001, nuestra misión es proporcionar servicios de recarga de extintores, gases para consumo y venta de elementos de seguridad industrial de la más alta calidad. Con más de 30 años de experiencia en el rubro, nos comprometemos a garantizar la seguridad y tranquilidad de nuestros clientes, ofreciendo asesoría personalizada y especializada, junto con productos que cumplen con los estándares de regulación, IRAM y Bureau Veritas.'
-    },
-    imageUrl: {
-      type: String,
-      default: frente_noble
     }
   },
+
   setup() {
     const sectionRef = ref(null)
     const isVisible = ref(false)
@@ -375,6 +367,19 @@ export default {
     transform: rotate(45deg);
     animation: bounce 2s infinite;
   }
+
+  .fade-edge {
+  /* Aplica un fade al inicio y final de la sección */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+
+  /* Para navegadores que no soportan mask, fallback */
+  background-clip: content-box;
+}
 
   /* Animations */
   @keyframes float {

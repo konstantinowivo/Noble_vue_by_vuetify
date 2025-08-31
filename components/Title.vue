@@ -5,7 +5,7 @@
             {{ text }}
         </h1>
         </div>
-    </section>
+    </section> 
 </template>
 
 <script setup>

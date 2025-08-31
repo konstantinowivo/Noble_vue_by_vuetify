@@ -3,14 +3,15 @@
     <v-row align="center" justify="center">
       <v-col cols="12" md="8" class="text-center" :style="contentStyle">
 
-        <div  class="hero-content">
-          <h1 class="main-title">{{ titleText }}</h1>
-          <h2 class="subtitle">{{ subtitleText }}</h2>
+        <div class="hero-content" ref="heroContent">
+          <h1 class="main-title" :class="{ visible: isVisible }">{{ titleText }}</h1>
+          <h2 class="subtitle" :class="{ visible: isVisible }">{{ subtitleText }}</h2>
           
-          <v-btn text to="/contacto" rounded="xl" size="x-large" class="cta-button">
-            <span>{{ ctaText }}</span>
-            <div class="button-glow"></div>
-          </v-btn>
+          <GlowButton 
+            :text="ctaText" 
+            to="/contacto" 
+            :delay="800"
+          />
         </div>
 
       </v-col>
@@ -21,14 +22,19 @@
 <script>
 import portadaImage from '@/assets/BannerPortada.jpg';
 import logoBgRemoved from '@/assets/logo.bg.removed.png'; 
+import GlowButton from '@/components/GlowButton.vue';
 
 export default {
-  name: 'HeroSection',  
+  name: 'HeroSection',
+  components: {
+    GlowButton
+  },  
   data() {
     return {
       loading: true,
       titleText: 'MATAFUEGOS NOBLE',
-      subtitleText: 'ofrecemos soluciones de calidad para tu empresa'
+      subtitleText: 'ofrecemos soluciones de calidad para tu empresa',
+      isVisible: false
     };
   },
   props: {
@@ -85,8 +91,21 @@ export default {
   },
   mounted() {
     document.fonts.ready.then(() => {
-      this.loading = false; 
+      this.loading = false;
+      
+      // Activar animación después de que las fuentes estén listas
+      this.$nextTick(() => {
+        setTimeout(() => {
+          this.isVisible = true;
+        }, 200); // pequeño delay para mejor efecto
+      });
     });
+  },
+  beforeUnmount() {
+    // Limpiar si hay algún observer
+    if (this.observer) {
+      this.observer.disconnect();
+    }
   }
 };
 </script>
@@ -134,34 +153,7 @@ export default {
   opacity: 1;
 }
 
-/* Botón glow */
-.cta-button {
-  position: relative;
-  border: 1px solid #fbbf24;
-  border-radius: 9999px;
-  padding: 12px 32px;
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  color: #fbbf24;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  z-index: 10;
-}
-.cta-button:hover {
-  background: #fbbf24;
-  color: black;
-}
-.button-glow {
-  position: absolute;
-  inset: 0;
-  border-radius: 9999px;
-  box-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.cta-button:hover .button-glow {
-  opacity: 1;
-}
+/* Estilos del botón ahora están en el componente GlowButton */
 
 /* Fade final */
 .v-container {

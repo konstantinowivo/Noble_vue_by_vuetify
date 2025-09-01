@@ -3,8 +3,6 @@
       ref="sectionRef"
       class="about-us-modern fade-edge"
   >
-    <!-- Background with parallax effect -->
-
     <!-- Floating particles -->
     <div class="particles-container">
         <div
@@ -43,6 +41,7 @@
   display: flex;
   gap: 2rem;
   margin-top: 3rem;
+  flex-direction: row; /* por defecto en PC */
 }
 
 /* Que la descripción y la imagen tengan la misma altura */
@@ -111,5 +110,28 @@
   border-radius: 50%;
   opacity: 0.2;
   animation: float 6s ease-in-out infinite;
+}
+
+/* Media query para tablet y móviles */
+@media (max-width: 1024px) {
+  .content-section {
+    flex-direction: column; /* apila verticalmente */
+    gap: 1.5rem;
+  }
+
+  .description-wrapper, .image-wrapper {
+    padding: 1rem;
+  }
+
+  .image-wrapper img {
+    height: auto; /* que la imagen no se corte en móviles */
+  }
+}
+
+/* Animación de partículas */
+@keyframes float {
+  0% { transform: translateY(0px); opacity: 0.2; }
+  50% { transform: translateY(-20px); opacity: 0.5; }
+  100% { transform: translateY(0px); opacity: 0.2; }
 }
 </style>

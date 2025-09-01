@@ -45,7 +45,7 @@ onUnmounted(() => {
     position: relative;
     z-index: 5;
     text-align: center;
-    margin-bottom: 48px;
+    margin-bottom: 24px;
 }
 
 .title {

@@ -28,27 +28,28 @@
         />
     </div>
 
-    <!-- Aquí usás tus componentes -->
     <MainTitle text="NUESTRA HISTORIA" :visible="true" />
-    <SubTitle text="nuestra pasión, su seguridad" :visible="true" />
+    <SubTitle text="NUESTRA PASIÓN, SU SEGURIDAD" :visible="true" />
+    <DecorativeLine />
+
     <Description text="Desde que fundamos Matafuegos Noble en 2001, siempre tuvimos en claro nuestra misión: Brindar un servicio personalizado y de la mayor calidad posible.
 Con más de 30 años de experiencia en el rubro, ofrecemos servicios de recarga de extintores, provisión de gases para consumo y la venta de elementos de seguridad industrial.
 Nuestro compromiso es garantizar la seguridad y tranquilidad de cada cliente, respaldados por asesoría especializada y productos que cumplen con las normativas más exigentes, incluyendo IRAM y Bureau Veritas." :visible="true" />
     
-    <div class="decorative-line" :class="{ visible: isVisible }">
-        <div class="line-left" />
-        <div class="center-dot" />
-        <div class="line-right" />
-    </div>
     </section>
 </template>
 
 <script setup>
-import MainTitle from '@/components/Title.vue'
+import MainTitle from '~/components/MainTitle.vue'
 import SubTitle from '@/components/Subtitle.vue'
 import Description from './Description.vue'
+import DecorativeLine from './DecorativeLine.vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
-// ⚡️ Si querés animar visibilidad con scroll, podés usar un ref y un observer
+const parallaxStyle = ref({
+    transform: 'translateY(0px)'
+})
+
 </script>
 
 <style scoped>

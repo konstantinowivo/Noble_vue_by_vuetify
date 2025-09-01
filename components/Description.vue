@@ -49,6 +49,7 @@ onUnmounted(() => {
   transform: translateY(32px);
   opacity: 0;
   transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.7s;
+  margin-bottom: clamp(2rem, 5vw, 6rem); /* Se adapta al tamaño de pantalla */
 }
 
 .description-container.visible {

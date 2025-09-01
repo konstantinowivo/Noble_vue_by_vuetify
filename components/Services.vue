@@ -65,7 +65,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import ServiceCard from '@/components/ServiceCard.vue' // Asegúrate que la ruta sea correcta
+import ServiceCard from '@/components/ServiceCard.vue'
 
 // Assets imports
 import matafuegosImage from '@/assets/portada.extintores.jpg'
@@ -136,6 +136,11 @@ onMounted(() => {
 })
 
 onUnmounted(() => observer && observer.disconnect())
+
+const parallaxStyle = ref({
+  transform: 'translateY(0px)'
+})
+
 </script>
 
 <style scoped>

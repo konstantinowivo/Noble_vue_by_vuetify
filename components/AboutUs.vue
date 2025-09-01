@@ -1,135 +1,118 @@
 <template>
-  <v-container class="about-us-section my-10">
-    <v-row no-gutters class="text-center">
-      <v-col cols="12">
-        <h1 :style="titleStyle" class="fade-in">{{ title }}</h1>
-        <h2 :style="subtitleStyle" class="slide-in">{{ description }}</h2>
-        <div :style="aboutUsImg" class="parallax-bg"></div>
-        <p :style="descriptionTextStyle" class="description-text fade-in-delay">{{ descriptionText }}</p>
-      </v-col>
-    </v-row>
-  </v-container>
+    <section 
+        ref="sectionRef"
+        class="about-us-modern fade-edge"
+        @mousemove="handleMouseMove"
+    >
+    <!-- Background with parallax effect -->
+    <div 
+        class="background-image"
+        :style="parallaxStyle"
+    />
+    
+    <!-- Gradient overlay -->
+    <!-- <div class="gradient-overlay" /> -->
+    
+    <!-- Floating particles animation -->
+    <div class="particles-container">
+        <div
+        v-for="i in 6"
+        :key="i"
+        class="particle"
+        :style="{
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+          animationDelay: `${i * 0.5}s`,
+          animationDuration: `${3 + Math.random() * 2}s`
+        }"
+        />
+    </div>
+
+    <MainTitle text="NUESTRA HISTORIA" :visible="true" />
+    <SubTitle text="NUESTRA PASIÓN, SU SEGURIDAD" :visible="true" />
+    <DecorativeLine />
+
+    <Description text="Desde que fundamos Matafuegos Noble en 2001, siempre tuvimos en claro nuestra misión: Brindar un servicio personalizado y de la mayor calidad posible.
+Con más de 30 años de experiencia en el rubro, ofrecemos servicios de recarga de extintores, provisión de gases para consumo y la venta de elementos de seguridad industrial.
+Nuestro compromiso es garantizar la seguridad y tranquilidad de cada cliente, respaldados por asesoría especializada y productos que cumplen con las normativas más exigentes, incluyendo IRAM y Bureau Veritas." :visible="true" />
+    
+    </section>
 </template>
 
-<script>
-import frente_noble from '@/assets/frente_noble2.jpg'; 
-export default {
-  name: 'AboutUs',
-  props: {
-    title: {
-      type: String,
-      default: 'Sobre Nosotros'
-    },
-    description: {
-      type: String,
-      default: 'Tu confianza, nuestra empresa'
-    },
-    descriptionText: {
-      type: String,
-      default: 'En Matafuegos Noble, empresa fundada en 2001, nuestra misión es proporcionar servicios de recarga de extintores, gases para consumo y venta de elementos de seguridad industrial de la más alta calidad. Con más de 30 años de experiencia en el rubro, nos comprometemos a garantizar la seguridad y tranquilidad de nuestros clientes, ofreciendo asesoría personalizada y especializada, junto con productos que cumplen con los estándares de regulación, IRAM y Bureau Veritas.'
-    }
-  },
-  computed: {
-    titleStyle() {
-      return {
-        fontFamily: '"Bebas Neue", cursive',
-        fontWeight: 'bolder',
-        fontStyle: 'italic',
-        color: 'yellow',
-        fontSize: '3.9rem',
-      };
-    },
-    subtitleStyle() {
-      return {
-        fontFamily: '"Bebas Neue", cursive',
-        fontStyle: 'italic',
-        color: 'white',
-        fontSize: '2rem',
-        marginBottom: '3rem',
-      };
-    },
-    descriptionTextStyle() {
-      return {
-        fontFamily: '"Alumni Sans Pinstripe", sans-serif',
-        fontWeight: '400',
-        color: 'white',
-        fontSize: '1.3rem',
-        textAlign: 'center',
-        maxWidth: '80%',
-        margin: 'auto',
-        padding: '1rem',
-      };
-    },
-    aboutUsImg() {
-      return {
-        background: `radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.7)), url(${frente_noble})`,
-        height: '100vh',  
-        width: '80%',      
-        margin: '0 auto',  
-        marginBottom: '3rem',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center center',
-        backgroundRepeat: 'no-repeat',
-        transition: 'transform 0.3s ease-out',
-        borderRadius: '10px' 
-      };
-    }
-  }
-};
+<script setup>
+import MainTitle from '~/components/MainTitle.vue'
+import SubTitle from '@/components/Subtitle.vue'
+import Description from './Description.vue'
+import DecorativeLine from './DecorativeLine.vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+
+const parallaxStyle = ref({
+    transform: 'translateY(0px)'
+})
+
 </script>
 
 <style scoped>
-.about-us-section {
-  padding: 2rem 0;
-  position: relative;
-  overflow: hidden;
+
+/* Gradient overlay */
+.gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, 
+    rgba(255, 193, 7, 0.1) 0%, 
+    rgba(33, 37, 41, 0.9) 40%, 
+    rgba(0, 0, 0, 0.95) 100%);
 }
 
-
-.fade-in {
-  opacity: 0;
-  animation: fadeIn 1s forwards;
+/* Particles container */
+.particles-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
 }
 
-.fade-in-delay {
-  opacity: 0;
-  animation: fadeIn 1.5s forwards;
+.particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #fbbf24;
+    border-radius: 50%;
+    opacity: 0.2;
+    animation: float 6s ease-in-out infinite;
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
+.decorative-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 48px;
+    transform: translateY(32px);
+    opacity: 0;
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.6s;
 }
 
-
-.slide-in {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: slideIn 1s forwards;
-}
-
-@keyframes slideIn {
-  to {
-    opacity: 1;
+.decorative-line.visible {
     transform: translateY(0);
-  }
+    opacity: 1;
 }
 
-
-.parallax-bg {
-  will-change: transform;
+.line-left, .line-right {
+    height: 1px;
+    width: 128px;
+    background: linear-gradient(to right, transparent, #fbbf24, transparent);
 }
 
-@media (max-width: 960px) {
-  .description-text {
-    font-size: 1.5rem;
-    max-width: 90%;
-  }
+.line-right {
+    background: linear-gradient(to left, transparent, #fbbf24, transparent);
+}
 
-
-  .parallax-bg {
-    height: 80vh;  
-  }
+.center-dot {
+    width: 8px;
+    height: 8px;
+    background: #fbbf24;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
 }
 </style>

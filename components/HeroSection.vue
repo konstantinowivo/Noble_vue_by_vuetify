@@ -3,19 +3,17 @@
     <v-row align="center" justify="center">
       <v-col cols="12" md="8" class="text-center" :style="contentStyle">
 
-        <v-img
-          v-if="loading"
-          :style="bannerLogoStyle"
-        ></v-img>
-
-        <div v-else>
-          <h1 class="hero-title">MATAFUEGOS NOBLE</h1>
-          <h2 class="hero-subtitle">ofrecemos soluciones de calidad para tu empresa</h2>
+        <div class="hero-content" ref="heroContent">
+          <h1 class="main-title" :class="{ visible: isVisible }">{{ titleText }}</h1>
+          <h2 class="subtitle" :class="{ visible: isVisible }">{{ subtitleText }}</h2>
           
-          <v-btn text to="/contacto" rounded="xl" size="x-large" :style="buttonStyle">
-            <span>{{ ctaText }}</span>
-          </v-btn>
+          <GlowButton 
+            :text="ctaText" 
+            to="/contacto" 
+            :delay="800"
+          />
         </div>
+
       </v-col>
     </v-row>
   </v-container>
@@ -24,12 +22,19 @@
 <script>
 import portadaImage from '@/assets/BannerPortada.jpg';
 import logoBgRemoved from '@/assets/logo.bg.removed.png'; 
+import GlowButton from '@/components/GlowButton.vue';
 
 export default {
-  name: 'HeroSection',  
+  name: 'HeroSection',
+  components: {
+    GlowButton
+  },  
   data() {
     return {
-      loading: true 
+      loading: true,
+      titleText: 'MATAFUEGOS NOBLE',
+      subtitleText: 'ofrecemos soluciones de calidad para tu empresa',
+      isVisible: false
     };
   },
   props: {
@@ -51,11 +56,26 @@ export default {
         justifyContent: 'center',
         position: 'relative',
         overflow: 'hidden',
+
+        /* Fade al final del componente */
+        WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 85%, transparent 100%)',
+        WebkitMaskRepeat: 'no-repeat',
+        WebkitMaskSize: '100% 100%',
+        maskImage: 'linear-gradient(to bottom, black 0%, black 85%, transparent 100%)',
+        maskRepeat: 'no-repeat',
+        maskSize: '100% 100%',
       };
     },
     bannerLogoStyle(){
       return{
-        backgroundImage: `url(${logoBgRemoved})`
+        backgroundImage: `url(${logoBgRemoved})`,
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        width: '300px',
+        height: '150px',
+        margin: '0 auto',
+        position: 'relative',
+        zIndex: 5
       }
     },
     contentStyle() {
@@ -64,75 +84,86 @@ export default {
         borderRadius: '10px',
         color: 'white',
         textAlign: 'center',
-      };
-    },
-    buttonStyle() {
-      return {
-        marginTop: '30px',
-        color: 'white',
+        position: 'relative',
+        zIndex: 10 // fuerza que esté sobre la imagen
       };
     }
   },
   mounted() {
-    document.documentElement.classList.add('font-loading');
-
     document.fonts.ready.then(() => {
-      document.documentElement.classList.remove('font-loading');
-      document.documentElement.classList.add('font-loaded');
-      this.loading = false; 
+      this.loading = false;
+      
+      // Activar animación después de que las fuentes estén listas
+      this.$nextTick(() => {
+        setTimeout(() => {
+          this.isVisible = true;
+        }, 200); // pequeño delay para mejor efecto
+      });
     });
+  },
+  beforeUnmount() {
+    // Limpiar si hay algún observer
+    if (this.observer) {
+      this.observer.disconnect();
+    }
   }
 };
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
 
-.font-loading .hero-title, .font-loading .hero-subtitle {
-  visibility: hidden;
+.hero-content {
+  position: relative;
+  z-index: 10; /* contenido por encima del fondo */
 }
 
-
-.hero-title {
-  font-size: 7rem; 
+.main-title {
+  font-family: 'Bebas Neue', cursive;
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
   font-style: italic;
-  font-weight: bold;
+  background: linear-gradient(45deg, #fbbf24, #fcd34d, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 20px rgba(255, 193, 7, 0.3);
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(32px);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.main-title.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.subtitle {
   font-family: 'Bebas Neue', cursive;
-  color: yellow;
-  margin: 0;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-style: italic;
+  color: white;
+  margin-bottom: 32px;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transform: translateY(32px);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+}
+.subtitle.visible {
+  transform: translateY(0);
+  opacity: 1;
 }
 
-.hero-subtitle {
-  font-size: 2.3rem;
-  font-family: 'Bebas Neue', cursive;
-  font-weight: 300;
-  margin-top: 2px;
-  margin-bottom: 20px;
+/* Estilos del botón ahora están en el componente GlowButton */
+
+/* Fade final */
+.v-container {
+  position: relative;
+  overflow: hidden;
 }
 
-.v-btn span {
-  font-size: 1.25rem;
-}
-
-
+/* Responsive */
 @media (max-width: 960px) { 
-  .hero-title {
-    font-size: 4.5rem; 
-  }
-  
-  .hero-subtitle {
-    font-size: 1.61rem; 
-  }
-}
-
-.nav-button {
-  display: flex;
-  align-items: center;
-  font-family: 'Bebas Neue', cursive;
-  font-weight: bolder;
-  font-style: italic;
-  color: yellow;
-  font-size: 150%;
-  text-decoration: none;
-  margin-right: 16px;
+  .main-title { font-size: 4.5rem; }
+  .subtitle { font-size: 1.61rem; }
 }
 </style>

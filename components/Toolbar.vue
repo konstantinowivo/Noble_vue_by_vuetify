@@ -1,13 +1,11 @@
 <template>
   <v-app-bar color="black" height="80" app class="custom-toolbar">
-    <!-- Logo -->
     <nuxt-link class="nav-button" to="/">
       <img src="../assets/title_nav.png" class="logo-image" alt="Logo" />
     </nuxt-link>
 
     <v-spacer></v-spacer>
 
-    <!-- Menú para móviles -->
     <div class="d-md-none">
       <v-menu v-model="menuOpen" offset-y>
         <template #activator="{ props }">
@@ -26,13 +24,11 @@
       </v-menu>
     </div>
 
-    <!-- Menú para desktop -->
     <div class="d-none d-md-flex">
       <nuxt-link to="/" class="nav-button">Inicio</nuxt-link>
       <nuxt-link to="/contacto" class="nav-button">Contacto</nuxt-link>
     </div>
 
-    <!-- Partículas decorativas -->
     <div class="particles-toolbar">
       <div
         v-for="i in 6"
@@ -42,7 +38,7 @@
           left: `${Math.random() * 100}%`,
           top: `${Math.random() * 100}%`,
           animationDelay: `${i * 0.5}s`,
-          animationDuration: `${3 + Math.random() * 2}s`
+          animationDuration: `${3 + Math.random() * 2}s`,
         }"
       />
     </div>
@@ -58,14 +54,14 @@ export default {
   },
   mounted() {
     this.checkScreenSize();
-    window.addEventListener('resize', this.checkScreenSize);
+    window.addEventListener("resize", this.checkScreenSize);
   },
   beforeDestroy() {
-    window.removeEventListener('resize', this.checkScreenSize);
+    window.removeEventListener("resize", this.checkScreenSize);
   },
   methods: {
     checkScreenSize() {
-      const isMediumOrLarger = window.matchMedia('(min-width: 960px)').matches;
+      const isMediumOrLarger = window.matchMedia("(min-width: 960px)").matches;
       if (isMediumOrLarger) {
         this.menuOpen = false;
       }
@@ -78,11 +74,10 @@ export default {
 .custom-toolbar {
   position: relative;
   overflow: hidden;
-  border-radius: 0 0 20px 20px; /* Bordes redondeados abajo */
+  border-radius: 0 0 20px 20px;
   padding: 0 1rem;
 }
 
-/* Fade inferior */
 .custom-toolbar::after {
   content: "";
   position: absolute;
@@ -94,17 +89,15 @@ export default {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
 }
 
-/* Logo */
 .logo-image {
   max-width: 250px;
   height: auto;
 }
 
-/* Botones de navegación con la tipografía anterior */
 .nav-button {
   display: flex;
   align-items: center;
-  font-family: 'Bebas Neue', cursive;
+  font-family: "Bebas Neue", cursive;
   font-weight: bolder;
   font-style: italic;
   font-size: 1.5rem;
@@ -119,7 +112,6 @@ export default {
   transform: scale(1.1);
 }
 
-/* Partículas */
 .particles-toolbar {
   position: absolute;
   inset: 0;
@@ -135,12 +127,19 @@ export default {
   animation: float 6s ease-in-out infinite;
 }
 
-/* Animación partículas */
 @keyframes float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25% { transform: translateY(-5px) rotate(90deg); }
-  50% { transform: translateY(-2px) rotate(180deg); }
-  75% { transform: translateY(-8px) rotate(270deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-5px) rotate(90deg);
+  }
+  50% {
+    transform: translateY(-2px) rotate(180deg);
+  }
+  75% {
+    transform: translateY(-8px) rotate(270deg);
+  }
 }
 </style>
-

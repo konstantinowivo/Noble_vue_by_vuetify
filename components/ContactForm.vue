@@ -3,7 +3,7 @@
     <v-row class="text-center">
       <v-col cols="12">
         <h1 :style="titleStyle">CONTACTANOS</h1>
-        <h2 :style="subtitleStyle">PEDÍ TU PRESUPUESTO SIN CARGO!</h2> 
+        <h2 :style="subtitleStyle">PEDÍ TU PRESUPUESTO SIN CARGO!</h2>
       </v-col>
     </v-row>
 
@@ -30,9 +30,7 @@
         required
       ></v-textarea>
 
-      <v-btn :disabled="!valid" @click="submit">
-        Enviar
-      </v-btn>
+      <v-btn :disabled="!valid" @click="submit"> Enviar </v-btn>
 
       <v-dialog v-model="showModal" max-width="400">
         <v-card>
@@ -48,28 +46,28 @@
 </template>
 
 <script>
-import emailjs from 'emailjs-com';
+import emailjs from "emailjs-com";
 
 export default {
-  name: 'ContactForm',
+  name: "ContactForm",
   data() {
     return {
       valid: false,
-      from_name: '',
-      email_id: '',
-      message: '',
+      from_name: "",
+      email_id: "",
+      message: "",
       showModal: false,
       nameRules: [
-        v => !!v || 'El nombre es requerido',
-        v => (v && v.length <= 50) || 'El nombre debe tener menos de 50 caracteres',
+        (v) => !!v || "El nombre es requerido",
+        (v) => (v && v.length <= 50) || "El nombre debe tener menos de 50 caracteres",
       ],
       emailRules: [
-        v => !!v || 'El email es requerido',
-        v => /.+@.+\..+/.test(v) || 'Introduce un email válido',
+        (v) => !!v || "El email es requerido",
+        (v) => /.+@.+\..+/.test(v) || "Introduce un email válido",
       ],
       messageRules: [
-        v => !!v || 'El mensaje es requerido',
-        v => (v && v.length <= 500) || 'El mensaje debe tener menos de 500 caracteres',
+        (v) => !!v || "El mensaje es requerido",
+        (v) => (v && v.length <= 500) || "El mensaje debe tener menos de 500 caracteres",
       ],
     };
   },
@@ -77,21 +75,21 @@ export default {
     titleStyle() {
       return {
         fontFamily: '"Bebas Neue", cursive',
-        fontWeight: 'bolder',
-        fontStyle: 'italic',
-        color: 'yellow',
-        fontSize: '3.9rem' 
+        fontWeight: "bolder",
+        fontStyle: "italic",
+        color: "yellow",
+        fontSize: "3.9rem",
       };
     },
     subtitleStyle() {
       return {
         fontFamily: '"Bebas Neue", cursive',
-        fontStyle: 'italic',
-        color: 'white',
-        fontSize: '2rem',
-        marginBottom: '3rem', 
+        fontStyle: "italic",
+        color: "white",
+        fontSize: "2rem",
+        marginBottom: "3rem",
       };
-    }
+    },
   },
   methods: {
     submit() {
@@ -103,24 +101,29 @@ export default {
         };
 
         emailjs
-          .send('service_6slf0ka', 'template_lo3v4hb', templateParams, '8Kp9zy0H--xYV5imf')
+          .send(
+            "service_bg5umki",
+            "template_lo3v4hb",
+            templateParams,
+            "8Kp9zy0H--xYV5imf"
+          )
           .then(
-            response => {
+            (response) => {
               this.clearForm();
               this.showModal = true;
-              console.log('SUCCESS!', response.status, response.text);
+              console.log("SUCCESS!", response.status, response.text);
             },
-            err => {
-              alert('Error al enviar el correo');
-              console.log('FAILED...', err);
+            (err) => {
+              alert("Error al enviar el correo");
+              console.log("FAILED...", err);
             }
           );
       }
     },
     clearForm() {
-      this.from_name = '';
-      this.email_id = '';
-      this.message = '';
+      this.from_name = "";
+      this.email_id = "";
+      this.message = "";
       this.$refs.form.resetValidation();
     },
   },

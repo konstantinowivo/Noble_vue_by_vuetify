@@ -28,9 +28,10 @@
         />
     </div>
 
-    <MainTitle text="NUESTRA HISTORIA" :visible="true" />
-    <SubTitle text="NUESTRA PASIÓN, SU SEGURIDAD" :visible="true" />
-    <DecorativeLine />
+        <div class="About-header">
+            <MainTitle text="NOSOTROS" />
+            <Subtitle text="NUESTRA PASIÓN, SU SEGURIDAD" />
+        </div>
 
     <Description text="Desde que fundamos Matafuegos Noble en 2001, siempre tuvimos en claro nuestra misión: Brindar un servicio personalizado y de la mayor calidad posible.
 Con más de 30 años de experiencia en el rubro, ofrecemos servicios de recarga de extintores, provisión de gases para consumo y la venta de elementos de seguridad industrial.
@@ -43,7 +44,6 @@ Nuestro compromiso es garantizar la seguridad y tranquilidad de cada cliente, re
 import MainTitle from '~/components/MainTitle.vue'
 import SubTitle from '@/components/Subtitle.vue'
 import Description from './Description.vue'
-import DecorativeLine from './DecorativeLine.vue'
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const parallaxStyle = ref({
@@ -70,6 +70,35 @@ const parallaxStyle = ref({
     inset: 0;
     overflow: hidden;
     pointer-events: none;
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.about-underline {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+    margin: 0 auto;
+    border-radius: 2px;
+    position: relative;
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+.about-underline::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.4), transparent);
+    border-radius: 2px;
+    animation: slide 2s ease-in-out infinite;
 }
 
 .particle {

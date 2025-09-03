@@ -57,7 +57,7 @@ import { useRouter } from "vue-router";
 import ServiceCard from "@/components/ServiceCard.vue";
 
 import matafuegosImage from "@/assets/portada.extintores.jpg";
-import sodaStreamImage from "@/assets/soda.stream.2.png";
+import recargaImage from "@/assets/recarga.co2.png";
 import instalacionImage from "@/assets/instalaciones.png";
 import elemSeguridad from "@/assets/casco-construccion-seguridad-vista-superior-mascara-medica.jpg";
 
@@ -77,10 +77,10 @@ const services = [
   },
   {
     id: 2,
-    title: "CÁPSULAS Y SODASTREAM",
+    title: "CÁPSULAS PARA SODA",
     description:
       "Venta y recarga de envases de CO2, cilindros y cápsulas para diferentes aplicaciones.",
-    image: sodaStreamImage,
+    image: recargaImage,
   },
   {
     id: 3,

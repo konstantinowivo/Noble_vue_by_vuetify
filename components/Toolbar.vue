@@ -1,73 +1,109 @@
 <template>
   <v-app-bar color="black" height="80" app class="custom-toolbar">
-    <nuxt-link class="nav-button" to="/">
-      <img src="../assets/title_nav.png" class="logo-image" alt="Logo" />
+    <nuxt-link class="nav-button-logo" to="/">
+      <img src="../assets/title_nav.png" class="logo-image" alt="Matafuegos Noble Logo" />
     </nuxt-link>
 
-    <v-spacer></v-spacer>
+    <v-spacer />
 
+    <!-- Menu móvil -->
     <div class="d-md-none">
       <v-menu v-model="menuOpen" offset-y>
         <template #activator="{ props }">
-          <v-btn icon v-bind="props">
+          <v-btn icon v-bind="props" aria-label="Abrir menú">
             <v-icon>mdi-menu</v-icon>
           </v-btn>
         </template>
         <v-list>
-          <v-list-item>
-            <nuxt-link to="/" class="nav-button">Inicio</nuxt-link>
-          </v-list-item>
-          <v-list-item>
-            <nuxt-link to="/contacto" class="nav-button">Contacto</nuxt-link>
+          <v-list-item v-for="item in navigationItems" :key="item.title">
+            <nuxt-link :to="item.to" class="nav-button" @click="closeMenu">
+              {{ item.title }}
+            </nuxt-link>
           </v-list-item>
         </v-list>
       </v-menu>
     </div>
 
+    <!-- Menu desktop -->
     <div class="d-none d-md-flex">
-      <nuxt-link to="/" class="nav-button">Inicio</nuxt-link>
-      <nuxt-link to="/contacto" class="nav-button">Contacto</nuxt-link>
+      <nuxt-link
+        v-for="item in navigationItems"
+        :key="item.title"
+        :to="item.to"
+        class="nav-button"
+      >
+        {{ item.title }}
+      </nuxt-link>
     </div>
 
+    <!-- Partículas decorativas -->
     <div class="particles-toolbar">
       <div
-        v-for="i in 6"
-        :key="i"
+        v-for="(particle, index) in particles"
+        :key="index"
         class="particle"
         :style="{
-          left: `${Math.random() * 100}%`,
-          top: `${Math.random() * 100}%`,
-          animationDelay: `${i * 0.5}s`,
-          animationDuration: `${3 + Math.random() * 2}s`,
+          left: particle.left,
+          top: particle.top,
+          width: particle.size,
+          height: particle.size,
+          animationDelay: particle.animationDelay,
+          animationDuration: particle.animationDuration,
         }"
       />
     </div>
   </v-app-bar>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      menuOpen: false,
-    };
-  },
-  mounted() {
-    this.checkScreenSize();
-    window.addEventListener("resize", this.checkScreenSize);
-  },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.checkScreenSize);
-  },
-  methods: {
-    checkScreenSize() {
-      const isMediumOrLarger = window.matchMedia("(min-width: 960px)").matches;
-      if (isMediumOrLarger) {
-        this.menuOpen = false;
-      }
-    },
-  },
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue';
+import { useParticleEffect } from '@/composables/useParticleEffect';
+import { NAVIGATION_ITEMS } from '@/constants/navigation';
+
+/**
+ * Componente Toolbar
+ * Refactorizado con Composition API, TypeScript y Clean Code
+ */
+
+// Estado del menú móvil
+const menuOpen = ref(false);
+
+// Usar composable para partículas (DRY principle)
+const { particles } = useParticleEffect({
+  count: 6,
+  minSize: 4,
+  maxSize: 6,
+});
+
+// Usar constantes centralizadas
+const navigationItems = NAVIGATION_ITEMS;
+
+/**
+ * Cierra el menú móvil
+ */
+const closeMenu = (): void => {
+  menuOpen.value = false;
 };
+
+/**
+ * Verifica el tamaño de la pantalla y cierra el menú si es necesario
+ */
+const checkScreenSize = (): void => {
+  const isMediumOrLarger = window.matchMedia('(min-width: 960px)').matches;
+  if (isMediumOrLarger) {
+    menuOpen.value = false;
+  }
+};
+
+// Lifecycle hooks
+onMounted(() => {
+  checkScreenSize();
+  window.addEventListener('resize', checkScreenSize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', checkScreenSize);
+});
 </script>
 
 <style scoped>
@@ -75,11 +111,11 @@ export default {
   position: relative;
   overflow: hidden;
   border-radius: 0 0 20px 20px;
-  padding: 0 1rem;
+  padding: 0 var(--spacing-md);
 }
 
 .custom-toolbar::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0;
   left: 0;
@@ -94,21 +130,27 @@ export default {
   height: auto;
 }
 
+.nav-button-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
 .nav-button {
   display: flex;
   align-items: center;
-  font-family: "Bebas Neue", cursive;
-  font-weight: bolder;
+  font-family: var(--font-primary);
+  font-weight: 900;
   font-style: italic;
-  font-size: 1.5rem;
-  color: #fbbf24;
-  margin-right: 16px;
+  font-size: var(--font-size-2xl);
+  color: var(--color-primary);
+  margin-right: var(--spacing-sm);
   text-decoration: none;
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .nav-button:hover {
-  color: #fff200;
+  color: var(--color-primary-hover);
   transform: scale(1.1);
 }
 
@@ -120,8 +162,6 @@ export default {
 
 .particles-toolbar .particle {
   position: absolute;
-  width: 6px;
-  height: 6px;
   background: rgba(251, 191, 36, 0.4);
   border-radius: 50%;
   animation: float 6s ease-in-out infinite;
@@ -140,6 +180,12 @@ export default {
   }
   75% {
     transform: translateY(-8px) rotate(270deg);
+  }
+}
+
+@media (max-width: 960px) {
+  .logo-image {
+    max-width: 180px;
   }
 }
 </style>

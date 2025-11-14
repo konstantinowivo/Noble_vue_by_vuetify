@@ -8,19 +8,18 @@
   >
     <div
       class="card-background"
-      :style="{ backgroundImage: `url(${service.image})` }"
-    ></div>
-    <div class="card-overlay"></div>
-    <div class="card-glow" :class="{ active: isHovered }"></div>
+      :style="{ backgroundImage: `url(${image})` }"
+    />
+    <div class="card-overlay" />
+    <div class="card-glow" :class="{ active: isHovered }" />
 
     <div class="card-content" :class="{ hovered: isHovered }">
-      <div v-if="service.icon" class="card-icon">{{ service.icon }}</div>
-      <h3 class="card-title">{{ service.title }}</h3>
-      <p class="card-description">{{ service.description }}</p>
+      <h3 class="card-title">{{ title }}</h3>
+      <p class="card-description">{{ description }}</p>
 
       <button class="cta-button" @click="handleButtonClick">
         <span class="button-text">{{ ctaText }}</span>
-        <div class="button-glow"></div>
+        <div class="button-glow" />
         <svg class="button-arrow" viewBox="0 0 24 24" fill="none">
           <path
             d="M5 12h14M12 5l7 7-7 7"
@@ -35,49 +34,59 @@
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted } from "vue";
+<script setup lang="ts">
+import { ref, watch, onMounted } from 'vue';
 
-const props = defineProps({
-  service: {
-    type: Object,
-    required: true,
-    validator: (service) => {
-      return service.title && service.description && service.image;
-    },
-  },
-  ctaText: {
-    type: String,
-    default: "Contactanos",
-  },
-  animationDelay: {
-    type: Number,
-    default: 0,
-  },
-  to: {
-    type: String,
-    default: "/contacto",
-  },
-  triggerAnimation: {
-    type: Boolean,
-    default: false,
-  },
+/**
+ * Props del componente ServiceCard
+ * Refactorizado con TypeScript para type safety
+ */
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  ctaText?: string;
+  animationDelay?: number;
+  to?: string;
+  triggerAnimation?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  ctaText: 'Contactanos',
+  animationDelay: 0,
+  to: '/contacto',
+  triggerAnimation: false,
 });
 
-const emit = defineEmits(["click", "hover"]);
+/**
+ * Eventos emitidos por el componente
+ */
+interface Emits {
+  (e: 'click', payload: { to: string }): void;
+}
+
+const emit = defineEmits<Emits>();
 
 const isVisible = ref(false);
 const isHovered = ref(false);
 
-const handleHover = (hovering) => {
+/**
+ * Maneja el estado de hover de la tarjeta
+ */
+const handleHover = (hovering: boolean): void => {
   isHovered.value = hovering;
-  emit("hover", { service: props.service, hovering });
 };
 
-const handleButtonClick = () => {
-  emit("click", { service: props.service, to: props.to });
+/**
+ * Maneja el click del botón CTA
+ */
+const handleButtonClick = (): void => {
+  emit('click', { to: props.to });
 };
 
+/**
+ * Observa el trigger de animación para mostrar la tarjeta
+ */
 watch(
   () => props.triggerAnimation,
   (newVal) => {
@@ -89,6 +98,9 @@ watch(
   }
 );
 
+/**
+ * Muestra la tarjeta al montar si no hay trigger externo
+ */
 onMounted(() => {
   if (!props.triggerAnimation) {
     setTimeout(() => {
@@ -99,17 +111,17 @@ onMounted(() => {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
 
 .service-card {
   position: relative;
-  border-radius: 16px;
+  border-radius: var(--radius-xl);
   overflow: hidden;
   min-height: 320px;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   transform: translateY(32px);
   opacity: 0;
-  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-duration) var(--transition-easing);
   cursor: pointer;
 }
 
@@ -150,7 +162,7 @@ onMounted(() => {
   position: absolute;
   inset: 0;
   border: 2px solid rgba(251, 191, 36, 0.2);
-  border-radius: 16px;
+  border-radius: var(--radius-xl);
   box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
   opacity: 0;
   transition: opacity 0.3s;
@@ -162,9 +174,9 @@ onMounted(() => {
 
 .card-content {
   position: relative;
-  z-index: 2;
-  padding: 24px;
-  color: white;
+  z-index: var(--z-index-particles);
+  padding: var(--spacing-md);
+  color: var(--color-text-primary);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -178,32 +190,22 @@ onMounted(() => {
   transform: translateY(-4px);
 }
 
-.card-icon {
-  font-size: 2rem;
-  margin-bottom: 12px;
-  transition: transform 0.3s ease;
-}
-
-.service-card:hover .card-icon {
-  transform: scale(1.1);
-}
-
 .card-title {
-  font-family: "Bebas Neue", cursive;
-  font-size: 1.5rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-2xl);
   margin-bottom: 12px;
   transition: color 0.3s ease;
 }
 
 .service-card:hover .card-title {
-  color: #fbbf24;
+  color: var(--color-primary);
 }
 
 .card-description {
-  font-family: "Inter", sans-serif;
-  font-size: 1rem;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-base);
   color: #e5e7eb;
-  margin-bottom: 16px;
+  margin-bottom: var(--spacing-sm);
   line-height: 1.5;
   transition: color 0.3s ease;
 }
@@ -215,25 +217,25 @@ onMounted(() => {
 .cta-button {
   position: relative;
   background: transparent;
-  color: #fbbf24;
-  border: 1px solid #fbbf24;
-  border-radius: 9999px;
-  padding: 8px 16px;
-  font-family: "Inter", sans-serif;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-full);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-family: var(--font-secondary);
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--spacing-xs);
   overflow: hidden;
   transition: all 0.3s ease;
   margin-top: auto;
 }
 
 .cta-button:hover {
-  background: #fbbf24;
-  color: black;
+  background: var(--color-primary);
+  color: var(--color-bg-darker);
   transform: translateY(-2px);
 }
 
@@ -249,7 +251,7 @@ onMounted(() => {
 .button-glow {
   position: absolute;
   inset: 0;
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
   box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
   opacity: 0;
   transition: opacity 0.3s;
@@ -297,10 +299,6 @@ onMounted(() => {
 @media (max-width: 480px) {
   .service-card {
     min-height: 240px;
-  }
-
-  .card-icon {
-    font-size: 1.5rem;
   }
 }
 </style>

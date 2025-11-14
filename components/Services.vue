@@ -8,14 +8,16 @@
 
     <div class="particles-container">
       <div
-        v-for="i in 8"
-        :key="i"
+        v-for="(particle, index) in particles"
+        :key="index"
         class="particle"
         :style="{
-          left: `${Math.random() * 100}%`,
-          top: `${Math.random() * 100}%`,
-          animationDelay: `${i * 0.5}s`,
-          animationDuration: `${3 + Math.random() * 2}s`,
+          left: particle.left,
+          top: particle.top,
+          width: particle.size,
+          height: particle.size,
+          animationDelay: particle.animationDelay,
+          animationDuration: particle.animationDuration,
         }"
       />
     </div>
@@ -37,70 +39,51 @@
       <div class="services-grid">
         <ServiceCard
           v-for="(service, index) in services"
-          :key="service.id"
-          :service="service"
-          :cta-text="ctaText"
+          :key="index"
+          :title="service.title"
+          :description="service.description"
+          :image="service.image"
           :animation-delay="index * 200"
           :trigger-animation="isVisible"
+          :cta-text="ctaText"
           to="/contacto"
-          @click="handleCardClick"
-          @hover="handleCardHover"
+          @click="handleCardClick(service)"
         />
       </div>
     </div>
   </section>
 </template>
 
-<script setup>
-import { ref, onMounted, onUnmounted, computed } from "vue";
-import { useRouter } from "vue-router";
-import ServiceCard from "@/components/ServiceCard.vue";
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import ServiceCard from '@/components/ServiceCard.vue';
+import { useIntersectionObserver } from '@/composables/useIntersectionObserver';
+import { useParticleEffect } from '@/composables/useParticleEffect';
+import { SERVICES, SERVICE_CTA_TEXT } from '@/constants/services';
+import type { Service } from '@/types/Service';
 
-import matafuegosImage from "@/assets/portada.extintores.jpg";
-import recargaImage from "@/assets/recarga.co2.png";
-import instalacionImage from "@/assets/instalaciones.png";
-import elemSeguridad from "@/assets/casco-construccion-seguridad-vista-superior-mascara-medica.jpg";
+/**
+ * Componente de sección de servicios
+ * Refactorizado siguiendo principios SOLID y Clean Code
+ */
 
 const router = useRouter();
-const sectionRef = ref(null);
-const isVisible = ref(false);
+const sectionRef = ref<HTMLElement | null>(null);
 const mousePosition = ref({ x: 0, y: 0 });
-let observer = null;
 
-const services = [
-  {
-    id: 1,
-    title: "ELEMENTOS DE SEGURIDAD",
-    description:
-      "Venta y asesoría en seguridad industrial, equipos de protección personal y elementos de seguridad laboral.",
-    image: elemSeguridad,
-  },
-  {
-    id: 2,
-    title: "CÁPSULAS PARA SODA",
-    description:
-      "Venta y recarga de envases de CO2, cilindros y cápsulas para diferentes aplicaciones.",
-    image: recargaImage,
-  },
-  {
-    id: 3,
-    title: "GASES PARA CONSUMO",
-    description:
-      "Brindamos asesoría, venta y servicio técnico especializado en gases industriales y comerciales.",
-    image: instalacionImage,
-  },
-  {
-    id: 4,
-    title: "EXTINTORES",
-    description:
-      "Venta y recarga anual de extintores, mantenimiento preventivo y asesoría en sistemas contra incendios.",
-    image: matafuegosImage,
-  },
-];
+// Usar composables reutilizables (DRY principle)
+const { isVisible } = useIntersectionObserver(sectionRef);
+const { particles } = useParticleEffect({ count: 8 });
 
-const ctaText = "Contactanos";
+// Usar constantes centralizadas
+const services = SERVICES;
+const ctaText = SERVICE_CTA_TEXT;
 
-const handleMouseMove = (event) => {
+/**
+ * Maneja el movimiento del mouse para efectos parallax
+ */
+const handleMouseMove = (event: MouseEvent): void => {
   const rect = sectionRef.value?.getBoundingClientRect();
   if (rect) {
     mousePosition.value = {
@@ -110,40 +93,28 @@ const handleMouseMove = (event) => {
   }
 };
 
-const handleCardClick = ({ service, to }) => {
-  console.log("Card clicked:", service.title);
-  router.push(to);
+/**
+ * Maneja el click en una tarjeta de servicio
+ */
+const handleCardClick = (service: Service): void => {
+  router.push('/contacto');
 };
 
-const handleCardHover = ({ service, hovering }) => {
-  console.log(`Card ${service.title} ${hovering ? "hovered" : "unhovered"}`);
-};
-
-onMounted(() => {
-  observer = new IntersectionObserver(
-    ([entry]) => {
-      isVisible.value = entry.isIntersecting;
-    },
-    { threshold: 0.1 }
-  );
-
-  if (sectionRef.value) observer.observe(sectionRef.value);
-});
-
-onUnmounted(() => observer && observer.disconnect());
-
-const parallaxStyle = ref({
-  transform: "translateY(0px)",
-});
+/**
+ * Estilo parallax calculado (podría mejorarse aún más)
+ */
+const parallaxStyle = computed(() => ({
+  transform: 'translateY(0px)',
+}));
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
 
 .services-section {
   position: relative;
   min-height: 100vh;
-  padding: 80px 20px;
+  padding: var(--spacing-3xl) var(--spacing-md);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -158,49 +129,17 @@ const parallaxStyle = ref({
   transition: transform 0.1s ease-out;
 }
 
-.gradient-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 193, 7, 0.1) 0%,
-    rgba(33, 37, 41, 0.9) 40%,
-    rgba(0, 0, 0, 0.95) 100%
-  );
-  z-index: 1;
-}
-
 .particles-container {
   position: absolute;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
-  z-index: 2;
-}
-
-.particle {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background: #fbbf24;
-  border-radius: 50%;
-  opacity: 0.2;
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-10px) rotate(180deg);
-  }
+  z-index: var(--z-index-particles);
 }
 
 .content-container {
   position: relative;
-  z-index: 5;
+  z-index: var(--z-index-content);
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
@@ -208,23 +147,23 @@ const parallaxStyle = ref({
 
 .header-section {
   text-align: center;
-  margin-bottom: 64px;
+  margin-bottom: var(--spacing-2xl);
 }
 
 .main-title {
-  font-family: "Bebas Neue", cursive;
+  font-family: var(--font-primary);
   font-size: clamp(3rem, 8vw, 6rem);
   font-weight: 900;
   font-style: italic;
-  background: linear-gradient(45deg, #fbbf24, #fcd34d, #f59e0b);
+  background: var(--gradient-gold);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 24px;
-  text-shadow: 0 4px 20px rgba(255, 193, 7, 0.3);
+  margin-bottom: var(--spacing-md);
+  text-shadow: var(--shadow-gold);
   transform: translateY(32px);
   opacity: 0;
-  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-duration) var(--transition-easing);
 }
 
 .main-title.visible {
@@ -233,15 +172,15 @@ const parallaxStyle = ref({
 }
 
 .subtitle {
-  font-family: "Bebas Neue", cursive;
+  font-family: var(--font-primary);
   font-size: clamp(1.5rem, 4vw, 2.5rem);
   font-style: italic;
-  color: white;
-  margin-bottom: 32px;
-  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-lg);
+  text-shadow: var(--shadow-text);
   transform: translateY(32px);
   opacity: 0;
-  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+  transition: all var(--transition-duration) var(--transition-easing) 0.3s;
 }
 
 .subtitle.visible {
@@ -253,11 +192,11 @@ const parallaxStyle = ref({
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  margin-bottom: 48px;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xl);
   transform: translateY(32px);
   opacity: 0;
-  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.6s;
+  transition: all var(--transition-duration) var(--transition-easing) 0.6s;
 }
 
 .decorative-line.visible {
@@ -269,37 +208,25 @@ const parallaxStyle = ref({
 .line-right {
   height: 1px;
   width: 128px;
-  background: linear-gradient(to right, transparent, #fbbf24, transparent);
+  background: linear-gradient(to right, transparent, var(--color-primary), transparent);
 }
 
 .line-right {
-  background: linear-gradient(to left, transparent, #fbbf24, transparent);
+  background: linear-gradient(to left, transparent, var(--color-primary), transparent);
 }
 
 .center-dot {
-  width: 8px;
-  height: 8px;
-  background: #fbbf24;
-  border-radius: 50%;
+  width: var(--spacing-xs);
+  height: var(--spacing-xs);
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
   animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(1.2);
-  }
 }
 
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 32px;
+  gap: var(--spacing-lg);
   width: 100%;
 }
 
@@ -326,16 +253,16 @@ const parallaxStyle = ref({
 
 @media (max-width: 768px) {
   .services-section {
-    padding: 60px 16px;
+    padding: 60px var(--spacing-sm);
   }
 
   .services-grid {
-    gap: 24px;
+    gap: var(--spacing-md);
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   }
 
   .header-section {
-    margin-bottom: 48px;
+    margin-bottom: var(--spacing-xl);
   }
 }
 
@@ -350,7 +277,7 @@ const parallaxStyle = ref({
   }
 
   .header-section {
-    margin-bottom: 32px;
+    margin-bottom: var(--spacing-lg);
   }
 }
 </style>
